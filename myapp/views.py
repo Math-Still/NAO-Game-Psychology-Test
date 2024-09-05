@@ -1,17 +1,26 @@
 from django.shortcuts import render
-
 from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+from .models import RequestData
 
-def request_view(request, request_type):
-    data = {}
-    if request_type == 1:
-        data = {'type': 1, 'message': 'result 1'}
-    elif request_type == 2:
-        data = {'type': 2, 'message': 'result 2'}
-    elif request_type == 3:
-        data = {'type': 3, 'message': 'result 3'}
+
+def request_view(request):
+    try:
+        data = RequestData.objects.get(request_type=1)
+        return JsonResponse({'request_type': 1, 'message': data.message})
+    except RequestData.DoesNotExist:
+        return JsonResponse({'request_type': 2, 'message': 'Unknown'})
+@csrf_exempt
+def set_view(request):
+    if request.method == 'POST':
+        new_data = json.loads(request.body)
+        request_type = new_data.get('request_type')
+        message = new_data.get('message')
+        if request_type and message:
+            RequestData.objects.update_or_create(request_type=request_type, defaults={'request_type': 1,'message': message})
+            return JsonResponse({'status': 'success', 'message': f'Data has been saved {message}'})
     else:
-        data = {'type': 0, 'message': 'unknown result'}
-
-    return JsonResponse(data)
+        return JsonResponse({'status': 'error', 'message': 'Not post'})
+    return JsonResponse({'status': 'error', 'message': 'Invilid'})
 # Create your views here.

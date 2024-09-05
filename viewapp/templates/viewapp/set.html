@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理端</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+
+<body>
+    <div id="dynamicDiv" onclick="fetchData(1)">点击请求 1</div>
+    <button onclick="fetchData(1)">查看当前状态</button>
+    <div class="selected-experiment" id="selectedExperiment">
+        <p>已选择的实验：</p>
+        <span id="selectedValue">无</span>
+    </div>
+    <h2>添加新数据</h2>
+    <!-- <input type="text" id="requestMessage" placeholder="请求消息" required> -->
+    <div class="radio-group">
+        <input type="radio" id="exp1" name="experiment" value="1">
+        <label for="exp1">1</label><br>
+        <input type="radio" id="exp2" name="experiment" value="2">
+        <label for="exp2">2</label><br>
+        <input type="radio" id="exp3" name="experiment" value="3">
+        <label for="exp3">3</label><br>
+        <input type="radio" id="exp4" name="experiment" value="4">
+        <label for="exp4">4</label><br>
+        <input type="radio" id="exp5" name="experiment" value="5">
+        <label for="exp5">5</label><br>
+    </div>
+    <button onclick="setData()">添加数据</button>
+
+    <script src="{% static 'set.js' %}" defer></script>
+</body>
+
+</html>

@@ -18,3 +18,19 @@ body, html {
     transition: background-color 1s, color 1s;
     cursor: pointer;
 }
+body {
+    font-family: Arial, sans-serif;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.radio-group {
+    margin-bottom: 10px;
+}
+.selected-experiment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+}

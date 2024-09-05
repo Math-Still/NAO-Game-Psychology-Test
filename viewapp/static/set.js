@@ -1,19 +1,3 @@
-const dynamicDiv = document.getElementById('dynamicDiv');
-
-dynamicDiv.onclick = function () {
-    dynamicDiv.style.backgroundColor = "#FFFFFF"
-    if (dynamicDiv.requestFullscreen) {
-        dynamicDiv.requestFullscreen();
-    } else if (dynamicDiv.mozRequestFullScreen) { // Firefox
-        dynamicDiv.mozRequestFullScreen();
-    } else if (dynamicDiv.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        dynamicDiv.webkitRequestFullscreen();
-    } else if (dynamicDiv.msRequestFullscreen) { // IE/Edge
-        dynamicDiv.msRequestFullscreen();
-    }
-};
-
-
 function fetchData(requestType) {
     fetch(`http://127.0.0.1:8000/getdata`)
         .then(response => response.json())
@@ -51,26 +35,37 @@ function fetchData(requestType) {
             console.error('请求失败:', error);
         });
 }
+function updateSelection() {
+    const selectedValue = document.getElementById('selectedValue');
+    const radios = document.getElementsByName('experiment');
+    let selectedExperiment = '';
 
-// function setData() {
-//     const requestType = document.getElementById('requestType').value;
-//     const requestMessage = document.getElementById('requestMessage').value;
-//     console.log(requestMessage)
-//     fetch('http://127.0.0.1:8000/setdata', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             type: parseInt(requestType),
-//             message: requestMessage
-//         })
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             alert(data.message); // 提示用户数据已保存
-//         })
-//         .catch(error => {
-//             console.error('set data error :', error);
-//         });
-// }
+    radios.forEach(radio => {
+        if (radio.checked) {
+            selectedExperiment = radio.value;
+        }
+    });
+
+    selectedValue.textContent = selectedExperiment;
+}
+function setData() {
+    fetch('http://127.0.0.1:8000/setdata', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            request_type: parseInt(requestType),
+            message: tmp
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message); // 提示用户数据已保存
+        })
+        .catch(error => {
+            console.error('set data error :', error);
+        });
+}
+
+
