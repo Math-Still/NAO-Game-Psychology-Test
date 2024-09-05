@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态请求显示</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+
+</head>
+
+<body>
+    <div id="dynamicDiv" onclick="fetchData(1)">点击请求 1</div>
+    <button onclick="fetchData(1)">请求 1</button>
+    <button onclick="fetchData(2)">请求 2</button>
+    <button onclick="fetchData(3)">请求 3</button>
+    <script src="{% static 'index.js' %}" defer></script>
+</body>
+
+</html>
