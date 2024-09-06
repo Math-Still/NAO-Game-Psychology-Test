@@ -5,16 +5,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>动态请求显示</title>
+    <title>实验</title>
     <link rel="stylesheet" href="{% static 'index.css' %}">
 
 </head>
 
 <body>
-    <div id="dynamicDiv" onclick="fetchData(1)">点击请求 1</div>
-    <button onclick="fetchData(1)">请求 1</button>
-    <button onclick="fetchData(2)">请求 2</button>
-    <button onclick="fetchData(3)">请求 3</button>
+    <div id="autoselect" style="display: none;">
+        <div class="sel" id="sel1">实验1</div>
+        <div class="sel" id="sel2">实验2</div>
+        <div class="sel" id="sel3">实验3</div>
+        <div class="sel" id="sel4">实验4</div>
+        <div class="sel" id="sel5">实验5</div>
+    </div>
+
+    <div id="dynamicDiv" >点击开始实验</div>
+
+
     <script src="{% static 'index.js' %}" defer></script>
 </body>
 

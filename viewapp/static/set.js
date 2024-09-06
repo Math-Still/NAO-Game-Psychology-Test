@@ -36,27 +36,22 @@ function fetchData(requestType) {
         });
 }
 function updateSelection() {
-    const selectedValue = document.getElementById('selectedValue');
-    const radios = document.getElementsByName('experiment');
-    let selectedExperiment = '';
-
-    radios.forEach(radio => {
-        if (radio.checked) {
-            selectedExperiment = radio.value;
-        }
-    });
-
+    const selectElement = document.getElementById('experimentSelect');
+    const selectedValue = document.getElementById('selectedValue')
+    const selectedExperiment = selectElement.value;
     selectedValue.textContent = selectedExperiment;
 }
 function setData() {
-    fetch('http://127.0.0.1:8000/setdata', {
+    const tmp = selectedValue.textContent
+    console.log(tmp)
+    fetch('http://127.0.0.1:8000/setdata/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            request_type: parseInt(requestType),
-            message: tmp
+            request_type: 1,
+            message: tmp,
         })
     })
         .then(response => response.json())

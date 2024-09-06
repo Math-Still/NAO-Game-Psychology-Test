@@ -10,27 +10,25 @@
 </head>
 
 <body>
-    <div id="dynamicDiv" onclick="fetchData(1)">点击请求 1</div>
     <button onclick="fetchData(1)">查看当前状态</button>
     <div class="selected-experiment" id="selectedExperiment">
         <p>已选择的实验：</p>
         <span id="selectedValue">无</span>
     </div>
-    <h2>添加新数据</h2>
-    <!-- <input type="text" id="requestMessage" placeholder="请求消息" required> -->
-    <div class="radio-group">
-        <input type="radio" id="exp1" name="experiment" value="1">
-        <label for="exp1">1</label><br>
-        <input type="radio" id="exp2" name="experiment" value="2">
-        <label for="exp2">2</label><br>
-        <input type="radio" id="exp3" name="experiment" value="3">
-        <label for="exp3">3</label><br>
-        <input type="radio" id="exp4" name="experiment" value="4">
-        <label for="exp4">4</label><br>
-        <input type="radio" id="exp5" name="experiment" value="5">
-        <label for="exp5">5</label><br>
+    <h2>修改实验</h2>
+    <div class="dropdown-container">
+        <select id="experimentSelect" onchange="updateSelection()">
+            <option value="0">请选择</option>
+            <option value="1">实验1</option>
+            <option value="2">实验2</option>
+            <option value="3">实验3</option>
+            <option value="4">实验4</option>
+            <option value="5">实验5</option>
+            <option value="6">自主设置</option>
+
+        </select>
     </div>
-    <button onclick="setData()">添加数据</button>
+    <button onclick="setData()">修改实验</button>
 
     <script src="{% static 'set.js' %}" defer></script>
 </body>

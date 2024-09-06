@@ -1,41 +1,90 @@
 const dynamicDiv = document.getElementById('dynamicDiv');
+const autoselect = document.getElementById('autoselect');
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
-dynamicDiv.onclick = function () {
-    dynamicDiv.style.backgroundColor = "#FFFFFF"
-    if (dynamicDiv.requestFullscreen) {
-        dynamicDiv.requestFullscreen();
-    } else if (dynamicDiv.mozRequestFullScreen) { // Firefox
-        dynamicDiv.mozRequestFullScreen();
-    } else if (dynamicDiv.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        dynamicDiv.webkitRequestFullscreen();
-    } else if (dynamicDiv.msRequestFullscreen) { // IE/Edge
-        dynamicDiv.msRequestFullscreen();
-    }
-};
+document.addEventListener('DOMContentLoaded', function () {
 
-
-function fetchData(requestType) {
+    dynamicDiv.onclick = function () {
+        init()
+        dynamicDiv.style.backgroundColor = "#FFFFFF"
+        if (dynamicDiv.requestFullscreen) {
+            dynamicDiv.requestFullscreen();
+        } else if (dynamicDiv.mozRequestFullScreen) { // Firefox
+            dynamicDiv.mozRequestFullScreen();
+        } else if (dynamicDiv.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            dynamicDiv.webkitRequestFullscreen();
+        } else if (dynamicDiv.msRequestFullscreen) { // IE/Edge
+            dynamicDiv.msRequestFullscreen();
+        }
+        start()
+    };
+    
+});
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.sel').forEach(function (element) {
+        element.addEventListener('click', function (event){
+            if (event.target.innerText === "实验1") {
+                exp()
+                your_function()
+                setTimeout(start, 2000);
+                // start()
+            } else if (event.target.innerText === "实验2") {
+                exp()
+                your_function()
+                setTimeout(start, 2000);
+            } else if (event.target.innerText === "实验3") {
+                exp()
+                your_function()
+                setTimeout(start, 2000);
+            } else if (event.target.innerText === "实验4") {
+                exp()
+                your_function()
+                setTimeout(start, 2000);
+            } else if (event.target.innerText === "实验5") {
+                exp()
+                your_function()
+                setTimeout(start, 2000);
+            }
+        });
+    });
+});
+function your_function(){
+    
+}
+function init() {
+    dynamicDiv.style.display = 'block'
+    autoselect.style.display = 'none'
+}
+function start() {
+    dynamicDiv.style.display = 'none'
+    autoselect.style.display = 'block'
+}
+function exp(){
+    dynamicDiv.style.display = 'none'
+    autoselect.style.display = 'none'
+}
+function fetchData() {
     fetch(`http://127.0.0.1:8000/getdata`)
         .then(response => response.json())
         .then(data => {
             if (data) {
-                if (data.message === 1) {
-                    dynamicDiv.style.backgroundColor = "#33FF57"; // 你可以根据需要更改颜色
-                    dynamicDiv.textContent = data.message;
-                }
-                if (data.message === 2) {
+                if (data.message === '1') {
                     dynamicDiv.style.backgroundColor = "#FFFFFF"; // 你可以根据需要更改颜色
                     dynamicDiv.textContent = data.message;
                 }
-                if (data.message === 3) {
-                    dynamicDiv.style.backgroundColor = "#33FF57"; // 你可以根据需要更改颜色
-                    dynamicDiv.textContent = data.message;
-                }
-                if (data.message === 4) {
+                else if (data.message === '2') {
                     dynamicDiv.style.backgroundColor = "#FFFFFF"; // 你可以根据需要更改颜色
                     dynamicDiv.textContent = data.message;
                 }
-                if (data.message === 5) {
+                else if (data.message === '3') {
+                    dynamicDiv.style.backgroundColor = "#FFFFFF"; // 你可以根据需要更改颜色
+                    dynamicDiv.textContent = data.message;
+                }
+                else if (data.message === '4') {
+                    dynamicDiv.style.backgroundColor = "#FFFFFF"; // 你可以根据需要更改颜色
+                    dynamicDiv.textContent = data.message;
+                }
+                else if (data.message === '5') {
                     dynamicDiv.style.backgroundColor = "#FFFFFF"; // 你可以根据需要更改颜色
                     dynamicDiv.textContent = data.message;
                 }
@@ -55,7 +104,6 @@ function fetchData(requestType) {
 // function setData() {
 //     const requestType = document.getElementById('requestType').value;
 //     const requestMessage = document.getElementById('requestMessage').value;
-//     console.log(requestMessage)
 //     fetch('http://127.0.0.1:8000/setdata', {
 //         method: 'POST',
 //         headers: {

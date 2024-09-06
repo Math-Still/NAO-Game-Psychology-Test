@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -8,6 +9,7 @@ body, html {
     align-items: center;
     justify-content: center;
 }
+
 #dynamicDiv {
     width: 80vw;
     height: 80vh;
@@ -18,17 +20,81 @@ body, html {
     transition: background-color 1s, color 1s;
     cursor: pointer;
 }
+
 body {
     font-family: Arial, sans-serif;
 }
+
+/* #autoselect {
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    transition: background-color 1s, color 1s;
+    cursor: pointer;
+} */
+/* #sel{
+    width: 20vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    transition: background-color 1s, color 1s;
+    cursor: pointer;
+} */
+.sel {
+    display: inline-block;
+    /* 使元素在同一行显示 */
+    padding: 10px;
+    /* 内边距 */
+    margin: 5px;
+    /* 外边距 */
+    border: 2px solid #000;
+    /* 边框 */
+    font-size: 24px;
+    /* 字体大小 */
+    font-weight: bold;
+    /* 字体加粗 */
+    cursor: pointer;
+    /* 鼠标悬停时显示手形光标 */
+    background-color: #f9f9f9;
+    /* 背景颜色 */
+    transition: background-color 0.3s ease;
+    /* 平滑过渡效果 */
+}
+@media screen and (min-width: 0) {
+    :fullscreen .sel,
+    :webkit-full-screen .sel,
+    :moz-full-screen .sel,
+    :ms-fullscreen .sel {
+        display: inline-block;
+        padding: 10px;
+        margin: 5px;
+        border: 2px solid #000;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #f9f9f9;
+    }
+}
+/* 鼠标悬停时改变背景颜色 */
+.sel:hover {
+    background-color: #ddd;
+}
+
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
 }
+
 .radio-group {
     margin-bottom: 10px;
 }
+
 .selected-experiment {
     border: 1px solid #ccc;
     padding: 10px;
