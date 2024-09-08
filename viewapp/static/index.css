@@ -8,43 +8,26 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #ffffff;
+
 }
 
-#dynamicDiv {
+.dynamicDiv {
     width: 80vw;
     height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3em;
+    font-size: 1000em;
     transition: background-color 1s, color 1s;
     cursor: pointer;
 }
+
 
 body {
     font-family: Arial, sans-serif;
 }
 
-/* #autoselect {
-    width: 80vw;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3em;
-    transition: background-color 1s, color 1s;
-    cursor: pointer;
-} */
-/* #sel{
-    width: 20vw;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    transition: background-color 1s, color 1s;
-    cursor: pointer;
-} */
 .sel {
     display: inline-block;
     /* 使元素在同一行显示 */
@@ -60,12 +43,13 @@ body {
     /* 字体加粗 */
     cursor: pointer;
     /* 鼠标悬停时显示手形光标 */
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     /* 背景颜色 */
     transition: background-color 0.3s ease;
     /* 平滑过渡效果 */
 }
-@media screen and (min-width: 0) {
+
+/* @media screen and (min-width: 0) {
     :fullscreen .sel,
     :webkit-full-screen .sel,
     :moz-full-screen .sel,
@@ -79,7 +63,7 @@ body {
         cursor: pointer;
         background-color: #f9f9f9;
     }
-}
+} */
 /* 鼠标悬停时改变背景颜色 */
 .sel:hover {
     background-color: #ddd;
