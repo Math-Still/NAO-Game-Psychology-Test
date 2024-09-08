@@ -13,7 +13,3 @@ myapp作为后端处理
 ## 如何更改前端
 
 到viewapp的static中，index.js中的your_function()和上面的触发器做修改
-
-## 目前有的一个bug
-
-全屏之后无法点击按钮

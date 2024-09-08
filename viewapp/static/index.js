@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
             body.msRequestFullscreen();
         }
     };
-
 });
 function delay(func, timeset) {
     const timeoutId = setTimeout(func, timeset);
