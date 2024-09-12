@@ -1,10 +1,22 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .models import RequestData,ExpResult
+from django.conf import settings
+import os
 
+def get_image(request, image_name):
+    # 构建图片的完整路径
+    image_path = os.path.join(settings.BASE_DIR, 'static', 'img', image_name)
+    print(image_path)
 
+    # 尝试打开并返回图片
+    try:
+        with open(image_path, 'rb') as img:
+            return HttpResponse(img.read(), content_type='image/jpeg')
+    except FileNotFoundError:
+        return HttpResponse(status=404)  # 返回404错误
 def request_view(request):
     try:
         data = RequestData.objects.get(request_type=1)

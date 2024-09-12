@@ -74,9 +74,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 // your_function()
                 // delay(start, 2000);
             } else if (event.target.innerText === "实验4") {
-                exp4()
-                // your_function()
-                // delay(start, 2000);
+                exp()
+                your_function()
+                delay(start, 2000);
             } else if (event.target.innerText === "实验5") {
                 exp()
                 your_function()
@@ -110,7 +110,7 @@ async function exp1() {
         await setdelay(1000)
         await respond(2)
         await setdelay(1000)
-        await select(decisions[seq[i]], self_val, computer_val)
+        await select1(decisions[seq[i]], self_val, computer_val)
         await respond(3)
         var time = get_time()
         write(1, i, self_val, computer_val, reactionTime, time)
@@ -153,7 +153,7 @@ async function exp2() {
         await setdelay(1000)
         await respond(5)
         await setdelay(1000)
-        await select(decisions[seq[i]], self_val, computer_val)
+        await select2(decisions[seq[i]], self_val, computer_val)
         await respond(6)
         var time = get_time()
         // time=str(t)
@@ -168,89 +168,26 @@ async function exp2() {
 }
 async function exp3() {
     const decisions = [
-        { option1: { self: 8, computer: 2 } },
-        { option1: { self: 7, computer: 3 } },
-        { option1: { self: 6, computer: 4 } },
-        { option1: { self: 5, computer: 5 } },
-        { option1: { self: 4, computer: 6 } },
-        { option1: { self: 3, computer: 7 } },
-        { option1: { self: 2, computer: 8 } },
-        { option1: { self: 8, computer: 2 } },
-        { option1: { self: 7, computer: 3 } },
-        { option1: { self: 6, computer: 4 } },
-        { option1: { self: 5, computer: 5 } },
-        { option1: { self: 4, computer: 6 } },
-        { option1: { self: 3, computer: 7 } },
-        { option1: { self: 2, computer: 8 } },
     ];
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {
         await respond(1)
         await setdelay(1000)
+
         await respond(7)
         await setdelay(1000)
-        computer_val = decisions[i].option1.computer
-        self_val = decisions[i].option1.self
-        tablep.innerText = "我得"+computer_val+" ¥，你得"+self_val+" ¥"
-        await respond(8)
-        await setdelay(1000)
         await select3(decisions[seq[i]], self_val, computer_val)
+        await respond(6)
         var time = get_time()
         // time=str(t)
-        write(3, i, self_val, computer_val, reactionTime, time)
-        // await setdelay(getRandomNumber(3000,5000))
+        write(2, i, self_val, computer_val, reactionTime, time)
+        await setdelay(getRandomNumber(3000,5000))
     }
     // await setdelay(1000)
     // respond(4)
     // await setdelay(3000)
     await start()
 
-}
-async function exp4() {
-    const decisions = [
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 7, "computer": 3 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 4, "computer": 6 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 3, "computer": 7 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 8, "computer": 2 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 4, "computer": 6 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 7, "computer": 3 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 7, "computer": 3 } },
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 4, "computer": 6 } },
-        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 4, "computer": 6 } },
-        { "option1": { "self": 3, "computer": 7 }, "option2": { "self": 3, "computer": 7 } }
-       ];
-    // await respond(1)
-    // await setdelay(1000)
-    // await respond(2)
-    // await setdelay(1000)
-    seq = generateRandomPermutation(decisions.length)
-    for (let i = 0; i < seq.length; i++) {
-        await respond(1)
-        await setdelay(1000)
-        await respond(9)
-        await setdelay(1000)
-        await select4(decisions[seq[i]], self_val, computer_val)
-        await respond(10)
-        var time = get_time()
-        write(1, i, self_val, computer_val, reactionTime, time)
-        await setdelay(getRandomNumber(3000,5000))
-        // await respond(1)
-        // await setdelay(1000)
-    }
-    respond(4)
-    await setdelay(2000)
-    await start()
 }
 // const tablehead
 // const tablep 
@@ -347,7 +284,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         tablehead.innerText = "提议者-NAO"
         tablep.style.display = 'none'
         tableimg.style.display = 'flex'
-        tableimg.src = 'img/nao.jpg'
+        tableimg.src = '{% static "img/nao.jpg" %}'
         //实验3的nao作为提议者 stage2
     } else if (option === 8) {
         dynamicDiv.style.display = 'none'
@@ -359,46 +296,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         // tablehead.innerText = "提议者-NAO"
         tablep.style.display = 'flex'
         tableimg.style.display = 'flex'
-        tableimg.src = 'img/nao.jpg'
-        //实验3
-    }else if (option === 9) {
-        dynamicDiv.style.display = 'none'
-        autoselect.style.display = 'none'
-        taskDecision.style.display = 'none'
-        table.style.display='flex'
-        tableadd.style.display = 'none'
-        tablehead.style.display = 'flex'
-        tablehead.innerText = "响应者-其他团队"
-        tablep.style.display = 'none'
-        tableimg.style.display = 'flex'
-        tableimg.src = 'img/group.png'
-        //实验4 2 
-    }else if (option === 10) {
-        dynamicDiv.style.display = 'none'
-        autoselect.style.display = 'none'
-        taskDecision.style.display = 'none'
-        table.style.display = 'flex'
-        tableadd.style.display = 'none'
-        tablehead.style.display = 'flex'
-        tablehead.innerText = "响应者-其他团队"
-        tablep.style.display = 'flex'
-        tablep.innerText = '请等待，对方正在决策'
-        tableimg.style.display = 'none'
-        //4 3
-    }else if (option === 11) {
-
-    }else if (option === 12) {
-
-    }else if (option === 13) {
-
-    }else if (option === 14) {
-
-    }else if (option === 15) {
-
-    }else if (option === 16) {
-
-    }else if (option === 17) {
-
+        tableimg.src = '{% static "img/nao.jpg" %}'
     }
 }
 
@@ -458,82 +356,6 @@ async function select1(decisions) {
             // 处理按钮2点击
             const endTime = Date.now(); // 记录结束时间
             reactionTime = endTime - startTime; // 计算反应时间
-            self_val = decisions.option2.self
-            self_all += self_val
-            computer_val = decisions.option2.computer
-            resolve(); // 解析 Promise，继续执行
-        };
-    })
-}
-
-async function select2(decisions) {
-    dynamicDiv.style.display = 'none'
-    autoselect.style.display = 'none'
-    table.style.display = 'none'
-    tableadd.style.display = 'none'
-    tablehead.style.display = 'none'
-    tablep.style.display = 'none'
-    tableimg.style.display = 'none'
-    taskDecision.style.display = 'block';
-    bt1 = document.getElementById('bt1');
-    bt2 = document.getElementById('bt2');
-    bt1.innerHTML = '自己：' + decisions.option1.self + '</br>NAO：' + decisions.option1.computer;
-    bt2.innerHTML = '自己：' + decisions.option2.self + '</br>NAO：' + decisions.option2.computer;
-    const startTime = Date.now(); // 记录开始时间
-    return new Promise(resolve => {
-        // 为按钮添加点击事件
-        bt1.onclick = () => {
-            // 处理按钮1点击
-            const endTime = Date.now(); // 记录结束时间
-            reactionTime = endTime - startTime; // 计算反应时间
-            self_val = decisions.option1.self
-            self_all += self_val
-            computer_val = decisions.option1.computer
-            resolve(); // 解析 Promise，继续执行
-        };
-
-        bt2.onclick = () => {
-            // 处理按钮2点击
-            const endTime = Date.now(); // 记录结束时间
-            reactionTime = endTime - startTime; // 计算反应时间
-            self_val = decisions.option2.self
-            self_all += self_val
-            computer_val = decisions.option2.computer
-            resolve(); // 解析 Promise，继续执行
-        };
-    })
-}
-async function select3(decisions) {
-    dynamicDiv.style.display = 'none'
-    autoselect.style.display = 'none'
-    table.style.display = 'flex'
-    tableadd.style.display = 'none'
-    tablehead.style.display = 'none'
-    tablep.style.display = 'none'
-    tableimg.style.display = 'none'
-    taskDecision.style.display = 'block';
-    // taskDecision.inn
-    bt1 = document.getElementById('bt1');
-    bt2 = document.getElementById('bt2');
-    bt1.innerHTML = "接受"
-    bt2.innerHTML = "拒绝"
-    const startTime = Date.now(); // 记录开始时间
-    return new Promise(resolve => {
-        // 为按钮添加点击事件
-        bt1.onclick = () => {
-            // 处理按钮1点击
-            const endTime = Date.now(); // 记录结束时间
-            reactionTime = endTime - startTime; // 计算反应时间
-            self_val = decisions.option1.self
-            self_all += self_val
-            computer_val = decisions.option1.computer
-            resolve(); // 解析 Promise，继续执行
-        };
-
-        bt2.onclick = () => {
-            // 处理按钮2点击
-            const endTime = Date.now(); // 记录结束时间
-            reactionTime = endTime - startTime; // 计算反应时间
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
@@ -542,46 +364,6 @@ async function select3(decisions) {
     })
 }
 
-async function select4(decisions) {
-    dynamicDiv.style.display = 'none'
-    autoselect.style.display = 'none'
-    table.style.display = 'none'
-    tableadd.style.display = 'none'
-    tablehead.style.display = 'none'
-    tablep.style.display = 'none'
-    tableimg.style.display = 'none'
-    taskDecision.style.display = 'block';
-
-    bt1 = document.getElementById('bt1');
-    bt2 = document.getElementById('bt2');
-    bt2.style.border = '4px solid blue'; // 增加蓝色边框
-    bt2.style.padding = '66px 76px'; // 调整内边距形成缝隙
-    bt2.style.boxSizing = 'border-box'; // 确保边框和内边距计算在宽度内    bt1.innerHTML = '自己：' + decisions.option1.self + '</br>他人：' + decisions.option1.computer;
-    bt2.innerHTML = '自己：' + decisions.option2.self + '</br>他人：' + decisions.option2.computer;
-    const startTime = Date.now(); // 记录开始时间
-    return new Promise(resolve => {
-        // 为按钮添加点击事件
-        bt1.onclick = () => {
-            // 处理按钮1点击
-            const endTime = Date.now(); // 记录结束时间
-            reactionTime = endTime - startTime; // 计算反应时间
-            self_val = decisions.option1.self
-            self_all += self_val
-            computer_val = decisions.option1.computer
-            resolve(); // 解析 Promise，继续执行
-        };
-
-        bt2.onclick = () => {
-            // 处理按钮2点击
-            const endTime = Date.now(); // 记录结束时间
-            reactionTime = endTime - startTime; // 计算反应时间
-            self_val = decisions.option2.self
-            self_all += self_val
-            computer_val = decisions.option2.computer
-            resolve(); // 解析 Promise，继续执行
-        };
-    })
-}
 function init() {
     // all.style.display = 'none'
     timeoutIds.forEach(clearTimeout);
@@ -602,11 +384,6 @@ function start() {
     dynamicDiv.style.display = 'none'
     autoselect.style.display = 'block'
     taskDecision.style.display = 'none'
-    table.style.display = 'none'
-    tableadd.style.display = 'none'
-    tablehead.style.display = 'none'
-    tablep.style.display = 'none'
-    tableimg.style.display = 'none'
     self_val = 0;
     computer_val = 0;
     self_all = 0

@@ -2,33 +2,99 @@ body,
 html {
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 100vh;
+    display: flex;
+    /* 使用 Flexbox */
     width: 100%;
+    /* 设置高度为视口高度 */
     overflow: hidden;
     display: flex;
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
+    justify-content: center;
+    /* 水平居中 */
     background-color: #ffffff;
+
+}
+#tableimg{
+        width: 100%; /* 自适应父容器 */
+        height: auto; /* 保持纵横比 */
+        max-width: 400px; /* 设置最大宽度 */
+}
+.showtable {
+    display: flex;
+    /* 使容器成为 Flexbox */
+    flex-direction: column;
+    /* 垂直排列子元素 */
+    justify-content: center;
+    /* 垂直居中 */
+    align-items: center;
+    /* 水平居中 */
+    font-size: 50px;
+    /* 字体大小 */
+    height: 100vh;
+    /* 设置容器高度为视口高度 */
+}
+
+.center-plus {
+    font-size: 150px;
+    /* 加号的大小 */
+    color: rgb(0, 0, 0);
+    /* 加号的颜色 */
+    position: absolute;
+    /* 绝对定位 */
+    top: 50%;
+    /* 垂直居中 */
+    left: 50%;
+    /* 水平居中 */
+    transform: translate(-50%, -50%);
+    /* 调整位置，使其真正在中心 */
+    font-family: Arial, sans-serif;
+    /* 使用更细的字体 */
 
 }
 
 .dynamicDiv {
     /* width: 80vw; */
     /* height: 80vh; */
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     font-size: 50px;
     transition: background-color 1s, color 1s;
     cursor: pointer;
-    width: 100%; /* 占满宽度 */
-    height: 100%; /* 占满高度 */
+    
+    /* width: 100%;  */
+    /* height: 100%;  */
 }
-.dynam-text{
+
+.pfont {
     font-size: 50px;
-    width: 100%; /* 占满宽度 */
-    height: 100%; /* 占满高度 */
+    /* 字体大小 */
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif; /* 使用 Times New Roman 字体 */
+
 }
+
+.dynam-text {
+    font-size: 60px;
+    /* width: 100%; */
+    /* 占满宽度 */
+    /* height: 100%; */
+    /* 占满高度 */
+    justify-content: center;
+    /* 居中按钮 */
+    align-items: center;
+    position: absolute;
+    /* 绝对定位 */
+    top: 10%;
+    /* 垂直居中 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 垂直居中 */
+}
+
 .hidden {
     display: none;
 }
@@ -52,9 +118,12 @@ html {
 
 .button-container {
     display: flex;
-    justify-content: center;/* 居中按钮 */
-    gap: 80px; /* 按钮间距 */
-    margin-top: 200px; /* 增加上边距 */
+    justify-content: center;
+    /* 居中按钮 */
+    gap: 80px;
+    /* 按钮间距 */
+    margin-top: 200px;
+    /* 增加上边距 */
 }
 
 .cbut:hover {
@@ -67,22 +136,29 @@ html {
     font-size: 80px;
     /* 可以根据需要调整字体大小 */
     margin-bottom: 50px;
-    
+
 }
 
 .choice {
-    display: flex; /* 使用 flexbox */
-    flex-direction: column; /* 垂直排列内容 */
-    justify-content: center; /* 垂直居中内容 */
-    align-items: center; /* 水平居中内容 */
+    display: flex;
+    /* 使用 flexbox */
+    flex-direction: column;
+    /* 垂直排列内容 */
+    justify-content: center;
+    /* 垂直居中内容 */
+    align-items: center;
+    /* 水平居中内容 */
     text-align: center;
     font-size: 32px;
     padding: 36px;
     border-radius: 10px;
     background-color: white;
-    width: 100%; /* 占满宽度 */
-    height: 65%; /* 占满高度 */
-    max-width: 600px; /* 最大宽度 */
+    width: 100%;
+    /* 占满宽度 */
+    height: 65%;
+    /* 占满高度 */
+    max-width: 600px;
+    /* 最大宽度 */
 
 }
 

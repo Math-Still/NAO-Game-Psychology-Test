@@ -11,8 +11,16 @@
 </head>
 
 <body>
-
-    <div id="dynamicDiv">
+    <div class="showtable" id="table" style="display: none;">
+        <h1 class="dynam-text" id="tablehead">响应者-电脑</h1>
+        <div class="pfont" id="tablep">电脑正在进行决策</div>
+        <svg class="center-plus" id="tableadd" width="200" height="200" viewBox="0 0 200 200" style="display: none;">
+            <line x1="100" y1="60" x2="100" y2="140" stroke="black" stroke-width="12" />
+            <line x1="60" y1="100" x2="140" y2="100" stroke="black" stroke-width="12" />
+        </svg>
+        <img id="tableimg" src="{% static 'img/center.jpg' %}"></img>
+    </div>
+    <div id="dynamicDiv" style="display: block;">
         <h1 id="dynam" class="dynam-text">点击开始实验</h1>
     </div>
     <div id="autoselect" style="display: none;">
