@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验程序</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        .hidden {
+            display: none;
+        }
+        .page {
+            text-align: center;
+            font-size: 24px;
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: white;
+            width: 80%;
+            max-width: 600px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="introduction" class="page">
+        <p>欢迎参加实验！请点击下面的按钮开始任务。</p>
+        <button onclick="startTask()">开始任务</button>
+    </div>
+
+    <div id="taskPage1" class="page hidden">
+        <p>第一页，停留一秒...</p>
+    </div>
+
+    <div id="taskPage2" class="page hidden">
+        <p>第二页，停留一秒...</p>
+    </div>
+
+    <div id="taskDecision" class="page hidden">
+        <p>请做出决策：</p>
+        <button onclick="makeDecision(1)">方案1</button>
+        <button onclick="makeDecision(2)">方案2</button>
+    </div>
+
+    <div id="feedback" class="page hidden">
+        <p>感谢您的决策，稍后将告知您本轮收益。</p>
+    </div>
+
+    <script>
+        let currentTask = 0;
+        const totalTasks = 10; // 假设有10轮任务
+        const decisions = [
+            {option1: "10,0", option2: "0,10"},
+            {option1: "9,1", option2: "1,9"},
+            // 添加其他决策选项...
+        ];
+
+        function startTask() {
+            document.getElementById('introduction').classList.add('hidden');
+            showPage(1);
+        }
+
+        function showPage(pageNumber) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+
+            if (pageNumber === 1) {
+                document.getElementById('taskPage1').classList.remove('hidden');
+                setTimeout(() => showPage(2), 1000);
+            } else if (pageNumber === 2) {
+                document.getElementById('taskPage2').classList.remove('hidden');
+                setTimeout(() => showDecisionPage(), 1000);
+            }
+        }
+
+        function showDecisionPage() {
+            document.getElementById('taskDecision').classList.remove('hidden');
+        }
+
+        function makeDecision(option) {
+            const decisionTime = new Date().getTime(); // 记录时间戳
+            // 记录用户的决策和时间戳
+            console.log(`用户选择了: 方案${option}, 时间戳: ${decisionTime}`);
+            document.getElementById('taskDecision').classList.add('hidden');
+            document.getElementById('feedback').classList.remove('hidden');
+
+            // 这里可以添加决策后的逻辑，比如延时后进入下一轮
+            setTimeout(() => {
+                currentTask++;
+                if (currentTask < totalTasks) {
+                    showPage(1);
+                } else {
+                    // 实验结束
+                    alert("实验结束，谢谢参与！");
+                }
+            }, 3000); // 3秒后进入下一轮
+        }
+    </script>
+
+</body>
+</html>

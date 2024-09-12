@@ -13,7 +13,7 @@
 <body>
 
     <div id="dynamicDiv">
-        <h1>点击开始实验</h1>
+        <h1 id="dynam" class="dynam-text">点击开始实验</h1>
     </div>
     <div id="autoselect" style="display: none;">
         <div class="sel" id="sel1">实验1</div>
@@ -22,7 +22,13 @@
         <div class="sel" id="sel4">实验4</div>
         <div class="sel" id="sel5">实验5</div>
     </div>
-
+    <div id="taskDecision" class="choice" style="display: none">
+        <p class="choice-text">请做出选择</p>
+        <div class="button-container">
+            <button onclick="" id="bt1" class="cbut">1</button>
+            <button onclick="" id="bt2" class="cbut">2</button>
+        </div>
+    </div>
     <script src="{% static 'index.js' %}" defer></script>
 </body>
 

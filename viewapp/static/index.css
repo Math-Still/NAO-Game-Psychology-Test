@@ -3,26 +3,88 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
     background-color: #ffffff;
 
 }
 
 .dynamicDiv {
-    width: 80vw;
-    height: 80vh;
+    /* width: 80vw; */
+    /* height: 80vh; */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1000em;
+    font-size: 50px;
     transition: background-color 1s, color 1s;
     cursor: pointer;
+    width: 100%; /* 占满宽度 */
+    height: 100%; /* 占满高度 */
+}
+.dynam-text{
+    font-size: 50px;
+    width: 100%; /* 占满宽度 */
+    height: 100%; /* 占满高度 */
+}
+.hidden {
+    display: none;
 }
 
+.cbut {
+    background-color: black;
+    /* 黑色背景 */
+    color: white;
+    /* 白色字体 */
+    padding: 70px 80px;
+    /* 增加按钮尺寸 */
+    border: none;
+    border-radius: 5px;
+    /* 圆角边框 */
+    font-size: 20px;
+    /* 增加字体大小 */
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;/* 居中按钮 */
+    gap: 80px; /* 按钮间距 */
+    margin-top: 200px; /* 增加上边距 */
+}
+
+.cbut:hover {
+    background-color: darkgray;
+    /* 悬停效果 */
+}
+
+.choice-text {
+    text-align: center;
+    font-size: 80px;
+    /* 可以根据需要调整字体大小 */
+    margin-bottom: 50px;
+    
+}
+
+.choice {
+    display: flex; /* 使用 flexbox */
+    flex-direction: column; /* 垂直排列内容 */
+    justify-content: center; /* 垂直居中内容 */
+    align-items: center; /* 水平居中内容 */
+    text-align: center;
+    font-size: 32px;
+    padding: 36px;
+    border-radius: 10px;
+    background-color: white;
+    width: 100%; /* 占满宽度 */
+    height: 65%; /* 占满高度 */
+    max-width: 600px; /* 最大宽度 */
+
+}
 
 body {
     font-family: Arial, sans-serif;
