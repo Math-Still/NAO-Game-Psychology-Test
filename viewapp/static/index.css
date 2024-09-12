@@ -16,11 +16,16 @@ html {
     background-color: #ffffff;
 
 }
-#tableimg{
-        width: 100%; /* 自适应父容器 */
-        height: auto; /* 保持纵横比 */
-        max-width: 400px; /* 设置最大宽度 */
+
+#tableimg {
+    width: 100%;
+    /* 自适应父容器 */
+    height: auto;
+    /* 保持纵横比 */
+    max-width: 400px;
+    /* 设置最大宽度 */
 }
+
 .showtable {
     display: flex;
     /* 使容器成为 Flexbox */
@@ -63,7 +68,7 @@ html {
     font-size: 50px;
     transition: background-color 1s, color 1s;
     cursor: pointer;
-    
+
     /* width: 100%;  */
     /* height: 100%;  */
 }
@@ -73,7 +78,8 @@ html {
     /* 字体大小 */
     text-align: center;
     /* 文本居中 */
-    font-family: 'Times New Roman', Times, serif; /* 使用 Times New Roman 字体 */
+    font-family: 'Times New Roman', Times, serif;
+    /* 使用 Times New Roman 字体 */
 
 }
 
@@ -97,6 +103,38 @@ html {
 
 .hidden {
     display: none;
+}
+
+.button-bordered {
+    position: relative;
+    /* 使伪元素相对于按钮定位 */
+    padding: 5px 10px;
+    /* 按钮的内边距 */
+    background-color: white;
+    /* 按钮背景颜色 */
+    border: none;
+    /* 去掉默认边框 */
+    cursor: pointer;
+    /* 鼠标悬停时显示手形光标 */
+}
+
+.button-bordered::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    /* 边框距离按钮顶部 */
+    left: -15px;
+    /* 边框距离按钮左侧 */
+    right: -15px;
+    /* 边框距离按钮右侧 */
+    bottom: -15px;
+    /* 边框距离按钮底部 */
+    border: 2px solid rgba(30, 0, 255, 0.684);
+    /* 边框颜色 */
+    border-radius: 4px;
+    /* 可选：圆角 */
+    pointer-events: none;
+    /* 使边框不阻止点击 */
 }
 
 .cbut {

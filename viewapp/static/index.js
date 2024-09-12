@@ -554,10 +554,10 @@ async function select4(decisions) {
 
     bt1 = document.getElementById('bt1');
     bt2 = document.getElementById('bt2');
-    bt2.style.border = '4px solid blue'; // 增加蓝色边框
-    bt2.style.padding = '66px 76px'; // 调整内边距形成缝隙
-    bt2.style.boxSizing = 'border-box'; // 确保边框和内边距计算在宽度内    bt1.innerHTML = '自己：' + decisions.option1.self + '</br>他人：' + decisions.option1.computer;
+    bt2.classList.add('button-bordered');
+    bt1.innerHTML = '自己：' + decisions.option1.self + '</br>他人：' + decisions.option1.computer;
     bt2.innerHTML = '自己：' + decisions.option2.self + '</br>他人：' + decisions.option2.computer;
+    
     const startTime = Date.now(); // 记录开始时间
     return new Promise(resolve => {
         // 为按钮添加点击事件
@@ -568,6 +568,7 @@ async function select4(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            bt2.classList.remove('button-bordered');
             resolve(); // 解析 Promise，继续执行
         };
 
@@ -578,6 +579,7 @@ async function select4(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            bt2.classList.remove('button-bordered');
             resolve(); // 解析 Promise，继续执行
         };
     })
