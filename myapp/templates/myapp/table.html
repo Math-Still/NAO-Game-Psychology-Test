@@ -30,6 +30,8 @@
             <th>用户获得</th>
             <th>电脑获得</th>
             <th>反应时间(ms)</th>
+            <th>实验时间</th>
+
             <!-- 添加其他字段标题 -->
         </tr>
     </thead>
@@ -42,13 +44,10 @@
                     <td>{{ row.self_val }}</td>
                     <td>{{ row.computer_val }}</td>
                     <td>{{ row.reaction_time }}</td>
+                    <td>{{ row.time }}</td>
                     <!-- 添加其他字段 -->
                 </tr>
             {% endfor %}
-        {% else %}
-            <tr>
-                <td colspan="3">{{ message }}</td>
-            </tr>
         {% endif %}
     </tbody>
 </table>

@@ -14,11 +14,12 @@ class Migration(migrations.Migration):
             name='ExpResult',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('exp_id', models.IntegerField(unique=True)),
+                ('exp_id', models.IntegerField()),
                 ('index', models.TextField()),
                 ('self_val', models.TextField()),
                 ('computer_val', models.TextField()),
                 ('reaction_time', models.TextField()),
+                ('time', models.TextField()),
             ],
         ),
     ]

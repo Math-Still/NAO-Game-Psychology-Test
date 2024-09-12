@@ -33,9 +33,10 @@ def set_exp(request):
         self_val = new_data.get("self_val")
         computer_val = new_data.get("computer_val")
         reaction_time = new_data.get("reaction_time")
-        if exp_id is not None:
+        time = new_data.get("time")
+        if ExpResult.objects.filter(exp_id=exp_id, index=index) is not None:
             ExpResult.objects.filter(exp_id=exp_id, index=index).delete()
-            ExpResult.objects.update_or_create(exp_id=exp_id,index=index,self_val=self_val,computer_val=computer_val,reaction_time=reaction_time)
+            ExpResult.objects.update_or_create(exp_id=exp_id,index=index,self_val=self_val,computer_val=computer_val,reaction_time=reaction_time,time=time)
             return JsonResponse({'status': 'success', 'message': f'Data has been saved {message}'})
     else:
         return JsonResponse({'status': 'error', 'message': 'Not post'})

@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 // your_function()
                 // delay(start, 2000);
             } else if (event.target.innerText === "实验2") {
-                exp()
-                your_function()
-                delay(start, 2000);
+                exp2()
+                // your_function()
+                // delay(start, 2000);
             } else if (event.target.innerText === "实验3") {
                 exp()
                 your_function()
@@ -86,27 +86,115 @@ async function exp1() {
     await respond(2)
     await setdelay(1000)
     seq = generateRandomPermutation(decisions.length)
-    console.log(seq)
     for (let i = 0; i < seq.length; i++) {
         await select(decisions[seq[i]], self_val, computer_val)
-        await respond(1)
-        write(1, i, self_val, computer_val, reactionTime)
-        await setdelay(1000)
+        await respond(3)
+        var time = get_time()
+        write(1, i, self_val, computer_val, reactionTime,time)
+        await setdelay(3000)
+        // await respond(1)
+        // await setdelay(1000)
     }
-    respond(3)
-    await setdelay(1000)
     respond(4)
     await setdelay(2000)
     await start()
 }
-function write(exp_id, index, self_val, computer_val, reaction_time) {
-    console.log(JSON.stringify({
-        exp_id: parseInt(exp_id),
-        index: index,
-        self_val: self_val,
-        computer_val: computer_val,
-        reaction_time: reaction_time,
-    }))
+function get_time(){
+    var date = new Date();
+    const options = {
+        timeZone: 'Asia/Shanghai',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false // 24小时制
+    };
+    return date.toLocaleString('zh-CN', options);
+
+}
+async function exp2(){
+    const decisions = [
+        { option1: { self: 8, computer: 2 }, option2: { self: 7, computer: 3 } },
+        { option1: { self: 8, computer: 2 }, option2: { self: 6, computer: 4 } },
+        { option1: { self: 8, computer: 2 }, option2: { self: 5, computer: 5 } },
+        { option1: { self: 8, computer: 2 }, option2: { self: 4, computer: 6 } },
+        { option1: { self: 8, computer: 2 }, option2: { self: 3, computer: 7 } },
+        { option1: { self: 8, computer: 2 }, option2: { self: 2, computer: 8 } },
+        { option1: { self: 7, computer: 3 }, option2: { self: 6, computer: 4 } },
+        { option1: { self: 7, computer: 3 }, option2: { self: 5, computer: 5 } },
+        { option1: { self: 7, computer: 3 }, option2: { self: 4, computer: 6 } },
+        { option1: { self: 7, computer: 3 }, option2: { self: 3, computer: 7 } },
+        { option1: { self: 7, computer: 3 }, option2: { self: 2, computer: 8 } },
+        { option1: { self: 6, computer: 4 }, option2: { self: 5, computer: 5 } },
+        { option1: { self: 6, computer: 4 }, option2: { self: 4, computer: 6 } },
+        { option1: { self: 6, computer: 4 }, option2: { self: 3, computer: 7 } },
+        { option1: { self: 6, computer: 4 }, option2: { self: 2, computer: 8 } },
+        { option1: { self: 5, computer: 5 }, option2: { self: 4, computer: 6 } },
+        { option1: { self: 5, computer: 5 }, option2: { self: 3, computer: 7 } },
+        { option1: { self: 5, computer: 5 }, option2: { self: 2, computer: 8 } },
+        { option1: { self: 4, computer: 6 }, option2: { self: 3, computer: 7 } },
+        { option1: { self: 4, computer: 6 }, option2: { self: 2, computer: 8 } },
+        { option1: { self: 3, computer: 7 }, option2: { self: 2, computer: 8 } },
+    ];
+    await respond(1)
+    await setdelay(1000)
+    await respond(5)
+    await setdelay(1000)
+    seq = generateRandomPermutation(decisions.length)
+    for (let i = 0; i < seq.length; i++) {
+        await select(decisions[seq[i]], self_val, computer_val)
+        await respond(6)
+        var time = get_time()
+        // time=str(t)
+        write(2, i, self_val, computer_val, reactionTime,time)
+        await setdelay(3000)
+    }
+    // await setdelay(1000)
+    // respond(4)
+    // await setdelay(3000)
+    await start()
+
+}
+async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进行决策 4 您的总收益为 5 响应其他团队
+    if (option === 1) {
+        dynamicDiv.style.display = 'none'
+        autoselect.style.display = 'none'
+        taskDecision.style.display = 'none'
+    } else if (option === 2) {
+        dynamicDiv.style.display = 'block'
+        autoselect.style.display = 'none'
+        taskDecision.style.display = 'none'
+        dynam.innerText = "响应者-电脑"
+    } else if (option === 3) {
+        dynamicDiv.style.display = 'block'
+        autoselect.style.display = 'none'
+        taskDecision.style.display = 'none'
+        dynam.innerText = "电脑正在进行决策"
+    } else if (option === 4) {
+        dynamicDiv.style.display = 'block'
+        autoselect.style.display = 'none'
+        taskDecision.style.display = 'none'
+        dynam.innerText = "您的总收益为：" + self_all + " ¥";
+    } else if (option === 5) {
+        dynamicDiv.style.display = 'block'
+        autoselect.style.display = 'none'
+        taskDecision.style.display = 'none'
+        dynam.innerText = "响应者-NAO"
+    } else if (option === 6) {
+        dynamicDiv.style.display = 'block'
+        autoselect.style.display = 'none'
+        taskDecision.style.display = 'none'
+        dynam.innerText = "请等待，NAO正在决策"
+    } else if (option === 7) {
+
+    } else if (option === 8) {
+
+    }
+}
+
+function write(exp_id, index, self_val, computer_val, reaction_time,time) {
     fetch('http://127.0.0.1:8000/set_exp/', {
         method: 'POST',
         headers: {
@@ -118,6 +206,7 @@ function write(exp_id, index, self_val, computer_val, reaction_time) {
             self_val: self_val,
             computer_val: computer_val,
             reaction_time: reaction_time,
+            time: time
         })
     }).then(response => console.log(response))
         .catch(error => {
@@ -198,36 +287,6 @@ function start() {
 
 function clean() {
     delay(init, 1500)
-}
-async function respond(option) {//1 白色 2 响应者电脑 3 响应nao 4 提议nao 5 响应其他团队
-    if (option === 1) {
-        dynamicDiv.style.display = 'none'
-        autoselect.style.display = 'none'
-        taskDecision.style.display = 'none'
-    } else if (option === 2) {
-        dynamicDiv.style.display = 'block'
-        autoselect.style.display = 'none'
-        taskDecision.style.display = 'none'
-        dynam.innerText = "响应者-电脑"
-    } else if (option === 3) {
-        dynamicDiv.style.display = 'block'
-        autoselect.style.display = 'none'
-        taskDecision.style.display = 'none'
-        dynam.innerText = "电脑正在进行决策"
-    } else if (option === 4) {
-        dynamicDiv.style.display = 'block'
-        autoselect.style.display = 'none'
-        taskDecision.style.display = 'none'
-        dynam.innerText = "您的总收益为：" + self_all + " ¥";
-    } else if (option === 5) {
-
-    } else if (option === 6) {
-
-    } else if (option === 7) {
-
-    } else if (option === 8) {
-
-    }
 }
 
 function fetchData() {
