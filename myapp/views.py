@@ -61,3 +61,5 @@ def get_exp(request,exp_id):
     return JsonResponse({'status': 'error', 'message': 'Invilid'})
 
     
+def qisay(request):
+    return render(request, 'myapp/nao.html')

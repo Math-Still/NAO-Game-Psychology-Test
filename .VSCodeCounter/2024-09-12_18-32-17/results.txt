@@ -1,0 +1,78 @@
+Date : 2024-09-12 18:32:17
+Directory : /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test
+Total : 36 files,  1744 codes, 300 comments, 245 blanks, all 2289 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          3 |      1,061 |        174 |         62 |      1,297 |
+| Python     |         27 |        305 |         34 |        124 |        463 |
+| HTML       |          4 |        224 |          2 |         25 |        251 |
+| CSS        |          1 |        145 |         90 |         27 |        262 |
+| Markdown   |          1 |          9 |          0 |          7 |         16 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                           | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                              |         36 |      1,744 |        300 |        245 |      2,289 |
+| . (Files)                                                                                                      |          2 |         26 |          1 |         12 |         39 |
+| myapp                                                                                                          |         15 |        587 |         87 |         75 |        749 |
+| myapp (Files)                                                                                                  |          7 |         85 |          8 |         17 |        110 |
+| myapp/migrations                                                                                               |          6 |         68 |          6 |         32 |        106 |
+| myapp/static                                                                                                   |          1 |        383 |         71 |         23 |        477 |
+| myapp/templates                                                                                                |          1 |         51 |          2 |          3 |         56 |
+| myapp/templates/myapp                                                                                          |          1 |         51 |          2 |          3 |         56 |
+| myproject                                                                                                      |          5 |        117 |         16 |         55 |        188 |
+| viewapp                                                                                                        |         14 |      1,014 |        196 |        103 |      1,313 |
+| viewapp (Files)                                                                                                |          7 |         18 |          3 |         14 |         35 |
+| viewapp/migrations                                                                                             |          1 |          0 |          0 |          1 |          1 |
+| viewapp/static                                                                                                 |          4 |        926 |        193 |         79 |      1,198 |
+| viewapp/templates                                                                                              |          2 |         70 |          0 |          9 |         79 |
+| viewapp/templates/viewapp                                                                                      |          2 |         70 |          0 |          9 |         79 |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                       | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/README.md                                      | Markdown   |          9 |          0 |          7 |         16 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/manage.py                                      | Python     |         17 |          1 |          5 |         23 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/__init__.py                              | Python     |          0 |          0 |          1 |          1 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/admin.py                                 | Python     |          1 |          1 |          2 |          4 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/apps.py                                  | Python     |          4 |          0 |          3 |          7 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/migrations/0001_initial.py               | Python     |         15 |          1 |          7 |         23 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/migrations/0002_populate_requestdata.py  | Python     |         10 |          2 |          6 |         18 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/migrations/0003_expresult.py             | Python     |         19 |          1 |          6 |         26 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/migrations/0004_alter_expresult_index.py | Python     |         12 |          1 |          6 |         19 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/migrations/0005_alter_expresult_time.py  | Python     |         12 |          1 |          6 |         19 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/migrations/__init__.py                   | Python     |          0 |          0 |          1 |          1 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/models.py                                | Python     |         15 |          2 |          3 |         20 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/static/tmp.js                            | JavaScript |        383 |         71 |         23 |        477 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/templates/myapp/table.html               | HTML       |         51 |          2 |          3 |         56 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/tests.py                                 | Python     |          1 |          1 |          2 |          4 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/urls.py                                  | Python     |          7 |          2 |          2 |         11 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myapp/views.py                                 | Python     |         57 |          2 |          4 |         63 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myproject/__init__.py                          | Python     |          0 |          0 |          1 |          1 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myproject/asgi.py                              | Python     |         10 |          0 |          7 |         17 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myproject/settings.py                          | Python     |         75 |         16 |         35 |        126 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myproject/urls.py                              | Python     |         22 |          0 |          5 |         27 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/myproject/wsgi.py                              | Python     |         10 |          0 |          7 |         17 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/__init__.py                            | Python     |          0 |          0 |          1 |          1 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/admin.py                               | Python     |          1 |          1 |          2 |          4 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/apps.py                                | Python     |          4 |          0 |          3 |          7 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/migrations/__init__.py                 | Python     |          0 |          0 |          1 |          1 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/models.py                              | Python     |          1 |          1 |          2 |          4 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/static/index.css                       | CSS        |        145 |         90 |         27 |        262 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/static/index.js                        | JavaScript |        651 |        103 |         36 |        790 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/static/set.js                          | JavaScript |         27 |          0 |          3 |         30 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/static/tmp.html                        | HTML       |        103 |          0 |         13 |        116 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/templates/viewapp/index.html           | HTML       |         39 |          0 |          4 |         43 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/templates/viewapp/set.html             | HTML       |         31 |          0 |          5 |         36 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/tests.py                               | Python     |          1 |          1 |          2 |          4 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/urls.py                                | Python     |          6 |          0 |          2 |          8 |
+| /Users/still/Desktop/testfolder/django/NAO-Game-Psychology-Test/viewapp/views.py                               | Python     |          5 |          0 |          2 |          7 |
+| Total                                                                                                          |            |      1,744 |        300 |        245 |      2,289 |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

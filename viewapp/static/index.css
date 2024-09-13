@@ -136,7 +136,48 @@ html {
     pointer-events: none;
     /* 使边框不阻止点击 */
 }
+.st-txt{
+    font-size: 30px;
+    /* width: 100%; */
+    /* 占满宽度 */
+    /* height: 100%; */
+    /* 占满高度 */
+    justify-content: center;
+    /* 居中按钮 */
+    align-items: center;
+    position: absolute;
+    /* 绝对定位 */
+    top: 30%;
+    /* 垂直居中 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 垂直居中 */
+}
+.startbt {
+    background-color: #000000;
+    color: white;
+    /* 白色字体 */
+    padding: 45px 35px;
+    /* 增加按钮尺寸 */
+    border: none;
+    border-radius: 5px;
+    /* 圆角边框 */
+    font-size: 20px;
+    /* 增加字体大小 */
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    position: absolute;
+    /* 绝对定位 */
+    top: 65%;
+    /* 垂直居中 */
+    left: 50%;
+    transform: translate(-50%, -50%);
 
+}
+.startbt:hover {
+    background-color: darkgray;
+    /* 悬停效果 */
+}
 .cbut {
     background-color: black;
     /* 黑色背景 */
