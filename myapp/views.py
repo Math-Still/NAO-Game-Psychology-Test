@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import RequestData,ExpResult
 from django.conf import settings
 import os
-import qi
+# import qi
 myip = "127.0.0.1"
 def get_image(request, image_name):
     # 构建图片的完整路径
@@ -65,7 +65,6 @@ def get_exp(request,exp_id):
 def qisay(request):
     ip=myip
     print(ip)
-
     if request.method == 'POST':
         new_data = json.loads(request.body)
         say_text = new_data.get("say_text")

@@ -237,6 +237,7 @@ async function exp2() {
         { option1: { self: 4, computer: 6 }, option2: { self: 2, computer: 8 } },
         { option1: { self: 3, computer: 7 }, option2: { self: 2, computer: 8 } },
     ];
+    say("在本次任务中，您将与我进行一场资源分配任务。在此次任务中，您将作为提议者，负责提出资源分配的方案。我将作为响应者，对您的提议作出接受或拒绝的决策。")
     await respond(12)
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {
@@ -251,6 +252,7 @@ async function exp2() {
         write(2, i, self_val, computer_val, reactionTime, time)
         await setdelay(getRandomNumber(3000, 5000))
     }
+    say("感谢您的决策，稍微我们将告知您本轮您的收益。")
     // await setdelay(1000)
     // respond(4)
     // await setdelay(3000)
@@ -274,6 +276,7 @@ async function exp3() {
         { option1: { self: 3, computer: 7 } },
         { option1: { self: 2, computer: 8 } },
     ];
+    say("在本次任务中，您将与我进行一场最后通牒博弈。在博弈中，我将作为提议者，负责提出资源分配的方案。您将作为响应者，对我的提议作出接受或拒绝的决策。")
     await respond(13)
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {
@@ -292,9 +295,11 @@ async function exp3() {
         write(3, i, self_val, computer_val, reactionTime, time)
         // await setdelay(getRandomNumber(3000,5000))
     }
+    
     // await setdelay(1000)
     // respond(4)
     // await setdelay(1000)
+    say("感谢您的决策，稍微我们将告知您本轮您的收益。")
     await start()
 
 }
@@ -326,6 +331,7 @@ async function exp4() {
     // await setdelay(1000)
     // await respond(2)
     // await setdelay(1000)
+    say("在本次任务中，您将与我组成团队，共同参与一场博弈，我将在博弈过程中提供建议和策略支持。然而，最终的提议和决策由你来决定。")
     await respond(14)
 
     seq = generateRandomPermutation(decisions.length)
@@ -363,6 +369,7 @@ async function exp5() {
         { option1: { self: 3, computer: 7, choice: 1 } },
         { option1: { self: 2, computer: 8, choice: 1 } },
     ];
+    say("在本次任务中，您将与我协作与其他团队进行一场博弈。您将扮演接受者的角色，我会给您提供建议，您可以基于我的建议做出决策。")
     await respond(15)
 
     seq = generateRandomPermutation(decisions.length)
@@ -385,6 +392,7 @@ async function exp5() {
     // await setdelay(1000)
     // respond(4)
     // await setdelay(3000)
+    say("感谢您的决策，稍微我们将告知您本轮您的收益")
     await start()
 
 }
