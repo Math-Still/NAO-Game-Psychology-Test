@@ -22,6 +22,20 @@ const sel4 = document.getElementById('sel4')
 const sel5 = document.getElementById('sel5')
 const sel6 = document.getElementById('sel6')
 var completedTasks = 0
+function say(say_text){
+    fetch('http://127.0.0.1:8000/qisay/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            say_text: say_text,
+        })
+    }).then(response => response)
+        .catch(error => {
+            console.error('set data error :', error);
+        });
+}
 document.addEventListener('DOMContentLoaded', function () {
 
     dynam.onclick = function () {

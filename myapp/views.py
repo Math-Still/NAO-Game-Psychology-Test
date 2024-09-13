@@ -5,11 +5,12 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import RequestData,ExpResult
 from django.conf import settings
 import os
-
+import qi
+myip = "127.0.0.1"
 def get_image(request, image_name):
     # 构建图片的完整路径
     image_path = os.path.join(settings.BASE_DIR, 'static', 'img', image_name)
-    print(image_path)
+    # print(image_path)
 
     # 尝试打开并返回图片
     try:
@@ -62,4 +63,19 @@ def get_exp(request,exp_id):
 
     
 def qisay(request):
-    return render(request, 'myapp/nao.html')
+    ip=myip
+    print(ip)
+
+    if request.method == 'POST':
+        new_data = json.loads(request.body)
+        say_text = new_data.get("say_text")
+        session = qi.Session(f'tcp://{ip}:9559')
+        tts = session.service("AlTextToSpeech")
+        tts.say(say_text)
+        return JsonResponse({'status': 'success', 'message': 'say'})
+    return JsonResponse({'status': 'error', 'message': 'not post'})
+def setip(request,ip):
+    global  myip 
+    myip=ip
+    print(myip)
+    return JsonResponse({'status': 'error', 'message': f'set ip:{myip}'})
