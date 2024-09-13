@@ -127,6 +127,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+async function exp1tes() {
+    const decisions = [
+        { option1: { self: 10, computer: 0 }, option2: { self: 9, computer: 1 } },
+        { option1: { self: 9, computer: 1 }, option2: { self: 8, computer: 2 } },
+        { option1: { self: 8, computer: 2 }, option2: { self: 7, computer: 3 } },
+        { option1: { self: 7, computer: 3 }, option2: { self: 6, computer: 4 } },
+        { option1: { self: 6, computer: 4 }, option2: { self: 5, computer: 5 } },
+        { option1: { self: 5, computer: 5 }, option2: { self: 4, computer: 6 } },
+        { option1: { self: 4, computer: 6 }, option2: { self: 3, computer: 7 } },
+        { option1: { self: 3, computer: 7 }, option2: { self: 2, computer: 8 } },
+        { option1: { self: 2, computer: 8 }, option2: { self: 1, computer: 9 } },
+        { option1: { self: 1, computer: 9 }, option2: { self: 0, computer: 10 } },
+    ];
+    // await respond(1)
+    // await setdelay(1000)
+    // await respond(2)
+    // await setdelay(1000)
+    seq = generateRandomPermutation(decisions.length)
+    for (let i = 0; i < 1; i++) {
+        await respond(1)
+        await setdelay(1000)
+        await respond(2)
+        await setdelay(1000)
+        await select1(decisions[seq[i]], self_val, computer_val)
+        await respond(3)
+        var time = get_time()
+        write(1, i, self_val, computer_val, reactionTime, time)
+        await setdelay(getRandomNumber(3000, 5000))
+        // await respond(1)
+        // await setdelay(1000)
+    }
+    respond(4)
+    await setdelay(2000)
+    await start()
+}
+
 async function exp1() {
     const decisions = [
         { option1: { self: 10, computer: 0 }, option2: { self: 9, computer: 1 } },
@@ -244,7 +280,7 @@ async function exp3() {
     }
     // await setdelay(1000)
     // respond(4)
-    // await setdelay(3000)
+    // await setdelay(1000)
     await start()
 
 }
@@ -279,7 +315,7 @@ async function exp4() {
     await respond(14)
 
     seq = generateRandomPermutation(decisions.length)
-    for (let i = 0; i < seq.length; i++) {
+    for (let i = 0; i < seq.length; i++) {//seq.length
         await respond(1)
         await setdelay(1000)
         await respond(9)
@@ -391,7 +427,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         tableimg.style.display = 'none'
         // tableimg.src = '{% static "img/computer.png" %}'
 
-        // dynam.innerText = "电脑正在进行决策"
+        // dynam.innerText = "电脑正在进行决策
     } else if (option === 4) {
         dynamicDiv.style.display = 'flex'
         autoselect.style.display = 'none'
@@ -401,7 +437,9 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         tablehead.style.display = 'none'
         tablep.style.display = 'none'
         tableimg.style.display = 'none'
-        dynamic.innerText = "您的总收益为：" + self_all + " ¥";
+        starttxt.innerText = "您的总收益为：" + self_all + " ¥";
+        starttxt.style.display = 'flex'
+        dynam.style.display = 'none'
     } else if (option === 5) {
         dynamicDiv.style.display = 'none'
         autoselect.style.display = 'none'

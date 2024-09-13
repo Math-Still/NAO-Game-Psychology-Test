@@ -137,7 +137,7 @@ html {
     /* 使边框不阻止点击 */
 }
 .st-txt{
-    font-size: 30px;
+    font-size: 35px;
     /* width: 100%; */
     /* 占满宽度 */
     /* height: 100%; */
@@ -147,7 +147,7 @@ html {
     align-items: center;
     position: absolute;
     /* 绝对定位 */
-    top: 30%;
+    top: 35%;
     /* 垂直居中 */
     left: 50%;
     transform: translate(-50%, -50%);
