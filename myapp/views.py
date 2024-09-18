@@ -5,11 +5,13 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import RequestData,ExpResult
 from django.conf import settings
 import os
+import qi
+myip = "127.0.0.1"
 
 def get_image(request, image_name):
     # 构建图片的完整路径
     image_path = os.path.join(settings.BASE_DIR, 'static', 'img', image_name)
-    print(image_path)
+    # print(image_path)
 
     # 尝试打开并返回图片
     try:
@@ -46,9 +48,10 @@ def set_exp(request):
         computer_val = new_data.get("computer_val")
         reaction_time = new_data.get("reaction_time")
         time = new_data.get("time")
+        option = new_data.get("option")
         if ExpResult.objects.filter(exp_id=exp_id, index=index) is not None:
             ExpResult.objects.filter(exp_id=exp_id, index=index).delete()
-            ExpResult.objects.update_or_create(exp_id=exp_id,index=index,self_val=self_val,computer_val=computer_val,reaction_time=reaction_time,time=time)
+            ExpResult.objects.update_or_create(exp_id=exp_id,index=index,self_val=self_val,computer_val=computer_val,reaction_time=reaction_time,time=time,option=option)
             return JsonResponse({'status': 'success', 'message': f'Data has been saved {message}'})
     else:
         return JsonResponse({'status': 'error', 'message': 'Not post'})
@@ -60,6 +63,22 @@ def get_exp(request,exp_id):
         return render(request, 'myapp/table.html', {'data': result_list})
     return JsonResponse({'status': 'error', 'message': 'Invilid'})
 
-    
+@csrf_exempt
 def qisay(request):
-    return render(request, 'myapp/nao.html')
+    ip=myip
+    if request.method == 'POST':
+        new_data = json.loads(request.body)
+        say_text = new_data.get("say_text")
+        iptmp = f'tcp://{ip}:9559'
+        session = qi.Session()
+        session.connect(iptmp)
+        tts = session.service("ALTextToSpeech")
+        tts.setLanguage("Chinese")
+        tts.say(say_text)
+        return JsonResponse({'status': 'success', 'message': 'say'})
+    return JsonResponse({'status': 'error', 'message': 'not post'})
+def setip(request,ip):
+    global  myip 
+    myip=ip
+    print(myip)
+    return JsonResponse({'status': 'error', 'message': f'set ip:{myip}'})

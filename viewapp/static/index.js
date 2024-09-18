@@ -9,10 +9,14 @@ const tableadd = document.getElementById('tableadd')
 const table = document.getElementById('table')
 const tableimg = document.getElementById('tableimg')
 const starttxt = document.getElementById('starttxt')
+const extraimg = document.getElementById('extraimg');
+const extrap = document.getElementById('extrap');
+const testflag = 1;
 var self_val = 0;
 var computer_val = 0;
 var reactionTime = 0;
 var self_all = 0;
+var option = 3
 const body = document.body;
 let timeoutIds = [];
 const sel1 = document.getElementById('sel1')
@@ -22,6 +26,20 @@ const sel4 = document.getElementById('sel4')
 const sel5 = document.getElementById('sel5')
 const sel6 = document.getElementById('sel6')
 var completedTasks = 0
+function say(say_text) {
+    fetch('http://127.0.0.1:8000/qisay/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            say_text: say_text,
+        })
+    }).then(response => response)
+        .catch(error => {
+            console.error('set data error :', error);
+        });
+}
 document.addEventListener('DOMContentLoaded', function () {
 
     dynam.onclick = function () {
@@ -99,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (event.target.innerText === "实验3") {
                 exp4()
                 sel4.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
-                sel4.style.pointerEvents = 'none'                
+                sel4.style.pointerEvents = 'none'
                 completedTasks += 1
 
                 // your_function()
@@ -150,7 +168,7 @@ async function exp1tes() {
         await setdelay(1000)
         await respond(2)
         await setdelay(1000)
-        await select1(decisions[seq[i]], self_val, computer_val)
+        await select1(decisions[seq[i]], self_val, computer_val, option)
         await respond(3)
         var time = get_time()
         write(1, i, self_val, computer_val, reactionTime, time)
@@ -181,7 +199,7 @@ async function exp1() {
     // await respond(2)
     // await setdelay(1000)
     seq = generateRandomPermutation(decisions.length)
-    for (let i = 0; i < seq.length; i++) {
+    for (let i = 0; i < seq.length; i++) {//seq.length
         await respond(1)
         await setdelay(1000)
         await respond(2)
@@ -189,7 +207,7 @@ async function exp1() {
         await select1(decisions[seq[i]], self_val, computer_val)
         await respond(3)
         var time = get_time()
-        write(1, i, self_val, computer_val, reactionTime, time)
+        write(1, i, self_val, computer_val, reactionTime, time, option)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -223,6 +241,7 @@ async function exp2() {
         { option1: { self: 4, computer: 6 }, option2: { self: 2, computer: 8 } },
         { option1: { self: 3, computer: 7 }, option2: { self: 2, computer: 8 } },
     ];
+    say("在本次任务中，您将与我进行一场资源分配任务。在此次任务中，您将作为提议者，负责提出资源分配的方案。我将作为响应者，对您的提议作出接受或拒绝的决策。")
     await respond(12)
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {
@@ -234,9 +253,10 @@ async function exp2() {
         await respond(6)
         var time = get_time()
         // time=str(t)
-        write(2, i, self_val, computer_val, reactionTime, time)
+        write(2, i, self_val, computer_val, reactionTime, time, option)
         await setdelay(getRandomNumber(3000, 5000))
     }
+    say("感谢您的决策，稍微我们将告知您本轮您的收益。")
     // await setdelay(1000)
     // respond(4)
     // await setdelay(3000)
@@ -260,6 +280,7 @@ async function exp3() {
         { option1: { self: 3, computer: 7 } },
         { option1: { self: 2, computer: 8 } },
     ];
+    say("在本次任务中，您将与我进行一场最后通牒博弈。在博弈中，我将作为提议者，负责提出资源分配的方案。您将作为响应者，对我的提议作出接受或拒绝的决策。")
     await respond(13)
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {
@@ -267,51 +288,54 @@ async function exp3() {
         await setdelay(1000)
         await respond(7)
         await setdelay(1000)
-        computer_val = decisions[i].option1.computer
-        self_val = decisions[i].option1.self
+        computer_val = decisions[seq[i]].option1.computer
+        self_val = decisions[seq[i]].option1.self
         tablep.innerText = "我得" + computer_val + " ¥，你得" + self_val + " ¥"
         await respond(8)
         await setdelay(1000)
         await select3(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
-        write(3, i, self_val, computer_val, reactionTime, time)
+        write(3, i, self_val, computer_val, reactionTime, time, option)
         // await setdelay(getRandomNumber(3000,5000))
     }
+
     // await setdelay(1000)
     // respond(4)
     // await setdelay(1000)
+    say("感谢您的决策，稍微我们将告知您本轮您的收益。")
     await start()
 
 }
 async function exp4() {
     const decisions = [
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 7, "computer": 3 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 4, "computer": 6 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 3, "computer": 7 } },
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 8, "computer": 2 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 4, "computer": 6 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 7, "computer": 3 } },
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 7, "computer": 3 } },
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } },
-        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } },
-        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 4, "computer": 6 } },
-        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 4, "computer": 6 } },
-        { "option1": { "self": 3, "computer": 7 }, "option2": { "self": 3, "computer": 7 } }
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 7, "computer": 3 } ,"choice":"1"},
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 6, "computer": 4 } ,"choice":"1"},
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 5, "computer": 5 } ,"choice":"1"},
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 4, "computer": 6 } ,"choice":"1"},
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 3, "computer": 7 } ,"choice":"1"},
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 8, "computer": 2 } ,"choice":"0"},
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 6, "computer": 4 } ,"choice":"1"},
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 5, "computer": 5 } ,"choice":"1"},
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 4, "computer": 6 } ,"choice":"1"},
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 7, "computer": 3 } ,"choice":"0"},
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 7, "computer": 3 } ,"choice":"0"},
+        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 5, "computer": 5 } ,"choice":"1"},
+        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } ,"choice":"0"},
+        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } ,"choice":"0"},
+        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } ,"choice":"0"},
+        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } ,"choice":"0"},
+        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } ,"choice":"0"},
+        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } ,"choice":"0"},
+        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 4, "computer": 6 } ,"choice":"0"},
+        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 4, "computer": 6 } ,"choice":"0"},
+        { "option1": { "self": 3, "computer": 7 }, "option2": { "self": 3, "computer": 7 } ,"choice":"0"}
     ];
     // await respond(1)
     // await setdelay(1000)
     // await respond(2)
     // await setdelay(1000)
+    say("在本次任务中，您将与我组成团队，共同参与一场博弈，我将在博弈过程中提供建议和策略支持。然而，最终的提议和决策由你来决定。")
     await respond(14)
 
     seq = generateRandomPermutation(decisions.length)
@@ -323,7 +347,7 @@ async function exp4() {
         await select4(decisions[seq[i]], self_val, computer_val)
         await respond(10)
         var time = get_time()
-        write(4, i, self_val, computer_val, reactionTime, time)
+        write(4, i, self_val, computer_val, reactionTime, time, option)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -349,6 +373,10 @@ async function exp5() {
         { option1: { self: 3, computer: 7, choice: 1 } },
         { option1: { self: 2, computer: 8, choice: 1 } },
     ];
+    say("在本次任务中，您将与我协作与其他团队进行一场博弈。您将扮演接受者的角色，我会给您提供建议，您可以基于我的建议做出决策。")
+    // await respond(10)
+    // await respond(11)
+    // await setdelay(100000000)
     await respond(15)
 
     seq = generateRandomPermutation(decisions.length)
@@ -357,20 +385,23 @@ async function exp5() {
         await setdelay(1000)
         await respond(10)
         await setdelay(1000)
-        computer_val = decisions[i].option1.computer
-        self_val = decisions[i].option1.self
+        computer_val = decisions[seq[i]].option1.computer
+        self_val = decisions[seq[i]].option1.self
         await respond(11)
+
         tablep.innerText = "我得" + computer_val + " ¥，你得" + self_val + " ¥"
+
         await setdelay(1000)
         await select5(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
-        write(5, i, self_val, computer_val, reactionTime, time)
+        write(5, i, self_val, computer_val, reactionTime, time, option)
         // await setdelay(getRandomNumber(3000,5000))
     }
     // await setdelay(1000)
     // respond(4)
     // await setdelay(3000)
+    say("感谢您的决策，稍微我们将告知您本轮您的收益")
     await start()
 
 }
@@ -527,6 +558,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
     } else if (option === 12) {
         dynamicDiv.style.display = 'flex'
         starttxt.innerText = "在本次任务中，您将与我进行一场资源分配任务。在此次任务中，您将作为提议者，负责提出资源分配的方案。我将作为响应者，对您的提议作出接受或拒绝的决策。"
+        dynam.style.display = "flex"
         autoselect.style.display = 'none'
         taskDecision.style.display = 'none'
         table.style.display = 'none'
@@ -546,6 +578,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
 
     } else if (option === 13) {
         dynamicDiv.style.display = 'flex'
+        dynam.style.display = "flex"
         starttxt.innerText = "在本次任务中，您将与我进行一场最后通牒博弈。在博弈中，我将作为提议者，负责提出资源分配的方案。您将作为响应者，对我的提议作出接受或拒绝的决策。"
         autoselect.style.display = 'none'
         taskDecision.style.display = 'none'
@@ -564,6 +597,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         //task2
     } else if (option === 14) {
         dynamicDiv.style.display = 'flex'
+        dynam.style.display = "flex"
         starttxt.innerText = "在本次任务中，您将与我组成团队，共同参与一场博弈，我将在博弈过程中提供建议和策略支持。然而，最终的提议和决策由你来决定。"
         autoselect.style.display = 'none'
         taskDecision.style.display = 'none'
@@ -582,6 +616,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         //task3
     } else if (option === 15) {
         dynamicDiv.style.display = 'flex'
+        dynam.style.display = "flex"
         starttxt.innerText = "在本次任务中，您将与我协作与其他团队进行一场博弈。您将扮演接受者的角色，我会给您提供建议，您可以基于我的建议做出决策。"
         autoselect.style.display = 'none'
         taskDecision.style.display = 'none'
@@ -614,7 +649,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
     }
 }
 
-function write(exp_id, index, self_val, computer_val, reaction_time, time) {
+function write(exp_id, index, self_val, computer_val, reaction_time, time, option) {
     fetch('http://127.0.0.1:8000/set_exp/', {
         method: 'POST',
         headers: {
@@ -626,7 +661,8 @@ function write(exp_id, index, self_val, computer_val, reaction_time, time) {
             self_val: self_val,
             computer_val: computer_val,
             reaction_time: reaction_time,
-            time: time
+            time: time,
+            option: option,
         })
     }).then(response => response)
         .catch(error => {
@@ -663,6 +699,7 @@ async function select1(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            option = 0
             resolve(); // 解析 Promise，继续执行
         };
 
@@ -673,6 +710,7 @@ async function select1(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            option = 1
             resolve(); // 解析 Promise，继续执行
         };
     })
@@ -701,6 +739,7 @@ async function select2(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            option = 0
             resolve(); // 解析 Promise，继续执行
         };
 
@@ -711,6 +750,7 @@ async function select2(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            option = 1
             resolve(); // 解析 Promise，继续执行
         };
     })
@@ -725,6 +765,12 @@ async function select3(decisions) {
     tableimg.style.display = 'none'
     taskDecision.style.display = 'block';
     // taskDecision.inn
+    extraimg.style.display = 'block'
+    extraimg.src='img/nao.jpg'
+    extrap.innerHTML = "我得" + decisions.option1.computer + " ¥，你得" + decisions.option1.self + " ¥"
+    extrap.style.display = 'block'
+    extrap.style.fontSize = "50px"
+
     bt1 = document.getElementById('bt1');
     bt2 = document.getElementById('bt2');
     bt1.innerHTML = "接受"
@@ -739,6 +785,11 @@ async function select3(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            option = 0
+            extrap.innerHTML = "请做出选择"
+            extrap.style.display = 'none'
+            extrap.style.fontSize = "80px"
+            extraimg.style.display = 'none'
             resolve(); // 解析 Promise，继续执行
         };
 
@@ -749,6 +800,11 @@ async function select3(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            option = 1
+            extrap.innerHTML = "请做出选择"
+            extrap.style.display = 'none'
+            extrap.style.fontSize = "80px"
+            extraimg.style.display = 'none'
             resolve(); // 解析 Promise，继续执行
         };
     })
@@ -766,11 +822,16 @@ async function select4(decisions) {
 
     bt1 = document.getElementById('bt1');
     bt2 = document.getElementById('bt2');
-    bt2.classList.add('button-bordered');
     bt1.innerHTML = '自己：' + decisions.option1.self + '</br>他人：' + decisions.option1.computer;
     bt2.innerHTML = '自己：' + decisions.option2.self + '</br>他人：' + decisions.option2.computer;
 
     const startTime = Date.now(); // 记录开始时间
+
+    if (decisions.choice === "0") {
+        bt1.classList.add('button-bordered');
+    } else {
+        bt2.classList.add('button-bordered');
+    }
     return new Promise(resolve => {
         // 为按钮添加点击事件
         bt1.onclick = () => {
@@ -780,6 +841,8 @@ async function select4(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            option = 0
+            bt1.classList.remove('button-bordered');
             bt2.classList.remove('button-bordered');
             resolve(); // 解析 Promise，继续执行
         };
@@ -791,12 +854,15 @@ async function select4(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            option = 1
+            bt1.classList.remove('button-bordered');
             bt2.classList.remove('button-bordered');
             resolve(); // 解析 Promise，继续执行
         };
     })
 }
 async function select5(decisions) {
+    // extrapimg.style.display = 'flex'
     dynamicDiv.style.display = 'none'
     autoselect.style.display = 'none'
     table.style.display = 'flex'
@@ -805,6 +871,11 @@ async function select5(decisions) {
     tablep.style.display = 'none'
     tableimg.style.display = 'none'
     taskDecision.style.display = 'block';
+    extraimg.style.display = 'block'
+    extraimg.src='img/nao.jpg'
+    extrap.innerHTML = "我得" + decisions.option1.computer + " ¥，你得" + decisions.option1.self + " ¥"
+    extrap.style.display = 'block'
+    extrap.style.fontSize = "50px"
     // taskDecision.inn
     bt1 = document.getElementById('bt1');
     bt2 = document.getElementById('bt2');
@@ -826,8 +897,14 @@ async function select5(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            option = 0
             bt1.classList.remove('button-bordered');
             bt2.classList.remove('button-bordered');
+            // extrapimg.style.display = 'none'
+            extrap.innerHTML = "请做出选择"
+            extrap.style.display = 'none'
+            extrap.style.fontSize = "80px"
+            extraimg.style.display = 'none'
             resolve(); // 解析 Promise，继续执行
         };
 
@@ -838,8 +915,14 @@ async function select5(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            option = 1
             bt1.classList.remove('button-bordered');
             bt2.classList.remove('button-bordered');
+            // extrapimg.style.display = 'none'
+            extrap.innerHTML = "请做出选择"
+            extrap.style.display = 'none'
+            extrap.style.fontSize = "80px"
+            extraimg.style.display = 'none'
             resolve(); // 解析 Promise，继续执行
         };
     })

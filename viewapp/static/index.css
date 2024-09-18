@@ -16,7 +16,22 @@ html {
     background-color: #ffffff;
 
 }
+#extraimg{
 
+    width: 100%;
+    /* 自适应父容器 */
+    height: auto;
+    /* 保持纵横比 */
+    max-width: 150px;
+    /* 设置最大宽度 */
+    /* justify-content: center;
+    /* 居中按钮 */
+    /* align-items: center; */ 
+
+    margin: 0 auto;
+    
+
+}
 #tableimg {
     width: 100%;
     /* 自适应父容器 */
@@ -183,7 +198,7 @@ html {
     /* 黑色背景 */
     color: white;
     /* 白色字体 */
-    padding: 70px 80px;
+    padding: 65px 75px;
     /* 增加按钮尺寸 */
     border: none;
     border-radius: 5px;
