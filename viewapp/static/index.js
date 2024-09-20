@@ -771,6 +771,11 @@ async function select3(decisions) {
     extrap.style.display = 'block'
     extrap.style.fontSize = "50px"
 
+    if (decisions.option1.choice === 1) {
+        bt1.classList.add('button-bordered');
+    } else {
+        bt2.classList.add('button-bordered');
+    }
     bt1 = document.getElementById('bt1');
     bt2 = document.getElementById('bt2');
     bt1.innerHTML = "接受"
@@ -872,7 +877,7 @@ async function select5(decisions) {
     tableimg.style.display = 'none'
     taskDecision.style.display = 'block';
     extraimg.style.display = 'block'
-    extraimg.src='img/nao.jpg'
+    extraimg.src='img/group.png'
     extrap.innerHTML = "我得" + decisions.option1.computer + " ¥，你得" + decisions.option1.self + " ¥"
     extrap.style.display = 'block'
     extrap.style.fontSize = "50px"
