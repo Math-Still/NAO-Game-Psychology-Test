@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import RequestData,ExpResult
 from django.conf import settings
 import os
-import qi
+# import qi
 myip = "127.0.0.1"
 
 def get_image(request, image_name):
