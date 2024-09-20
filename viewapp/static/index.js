@@ -17,6 +17,7 @@ var computer_val = 0;
 var reactionTime = 0;
 var self_all = 0;
 var option = 3
+var other_option=""
 const body = document.body;
 let timeoutIds = [];
 const sel1 = document.getElementById('sel1')
@@ -171,7 +172,7 @@ async function exp1tes() {
         await select1(decisions[seq[i]], self_val, computer_val, option)
         await respond(3)
         var time = get_time()
-        write(1, i, self_val, computer_val, reactionTime, time)
+        write(1, i, self_val, computer_val, reactionTime, time,other_option)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -207,7 +208,7 @@ async function exp1() {
         await select1(decisions[seq[i]], self_val, computer_val)
         await respond(3)
         var time = get_time()
-        write(1, i, self_val, computer_val, reactionTime, time, option)
+        write(1, i, self_val, computer_val, reactionTime, time, option,other_option)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -253,7 +254,7 @@ async function exp2() {
         await respond(6)
         var time = get_time()
         // time=str(t)
-        write(2, i, self_val, computer_val, reactionTime, time, option)
+        write(2, i, self_val, computer_val, reactionTime, time, option,other_option)
         await setdelay(getRandomNumber(3000, 5000))
     }
     say("感谢您的决策，稍微我们将告知您本轮您的收益。")
@@ -296,7 +297,7 @@ async function exp3() {
         await select3(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
-        write(3, i, self_val, computer_val, reactionTime, time, option)
+        write(3, i, self_val, computer_val, reactionTime, time, option,other_option)
         // await setdelay(getRandomNumber(3000,5000))
     }
 
@@ -347,7 +348,7 @@ async function exp4() {
         await select4(decisions[seq[i]], self_val, computer_val)
         await respond(10)
         var time = get_time()
-        write(4, i, self_val, computer_val, reactionTime, time, option)
+        write(4, i, self_val, computer_val, reactionTime, time, option,other_option)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -395,7 +396,7 @@ async function exp5() {
         await select5(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
-        write(5, i, self_val, computer_val, reactionTime, time, option)
+        write(5, i, self_val, computer_val, reactionTime, time, option,other_option)
         // await setdelay(getRandomNumber(3000,5000))
     }
     // await setdelay(1000)
@@ -649,7 +650,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
     }
 }
 
-function write(exp_id, index, self_val, computer_val, reaction_time, time, option) {
+function write(exp_id, index, self_val, computer_val, reaction_time, time, option,other_option) {
     fetch('http://127.0.0.1:8000/set_exp/', {
         method: 'POST',
         headers: {
@@ -663,6 +664,7 @@ function write(exp_id, index, self_val, computer_val, reaction_time, time, optio
             reaction_time: reaction_time,
             time: time,
             option: option,
+            other_option: other_option,
         })
     }).then(response => response)
         .catch(error => {
@@ -699,6 +701,7 @@ async function select1(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            other_option = decisions.option2
             option = 0
             resolve(); // 解析 Promise，继续执行
         };
@@ -710,6 +713,7 @@ async function select1(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            other_option = decisions.option1
             option = 1
             resolve(); // 解析 Promise，继续执行
         };
@@ -739,6 +743,7 @@ async function select2(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            other_option = decisions.option2
             option = 0
             resolve(); // 解析 Promise，继续执行
         };
@@ -750,6 +755,7 @@ async function select2(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            other_option = decisions.option1
             option = 1
             resolve(); // 解析 Promise，继续执行
         };
@@ -846,6 +852,7 @@ async function select4(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            other_option = decisions.option2
             option = 0
             bt1.classList.remove('button-bordered');
             bt2.classList.remove('button-bordered');
@@ -859,6 +866,7 @@ async function select4(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            other_option = decisions.option1
             option = 1
             bt1.classList.remove('button-bordered');
             bt2.classList.remove('button-bordered');
