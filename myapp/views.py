@@ -5,8 +5,42 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import RequestData,ExpResult
 from django.conf import settings
 import os
-import qi
+import pandas as pd
+import time
+
+# import qi
 myip = "127.0.0.1"
+
+@csrf_exempt
+def save(request):
+    exp_data = ExpResult.objects.filter(exp_id__in=[0,1,2,3,4,5])  # 替换为实际的 exp_id
+    data = {
+        'exp_id': [],
+        'index': [],
+        'self_val': [],
+        'computer_val': [],
+        'reaction_time': [],
+        'time': [],
+        'option': [],
+        'other_option': []
+    }
+    for result in exp_data:
+        data['exp_id'].append(result.exp_id)
+        data['index'].append(result.index)
+        data['self_val'].append(result.self_val)
+        data['computer_val'].append(result.computer_val)
+        data['reaction_time'].append(result.reaction_time)
+        data['time'].append(result.time)
+        data['option'].append(result.option)
+        data['other_option'].append(result.other_option)
+    df = pd.DataFrame(data)
+
+    # 导出到 CSV 文件
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) 
+    csv_file_path = f'experiment_results_{timestamp}.csv'
+    df.to_csv(csv_file_path, index=False)
+    print(f"CSV 文件已成功生成：{csv_file_path}")
+    return JsonResponse({'status': 'success', 'message': f'Data has been saved'})
 
 def get_image(request, image_name):
     # 构建图片的完整路径
@@ -49,9 +83,10 @@ def set_exp(request):
         reaction_time = new_data.get("reaction_time")
         time = new_data.get("time")
         option = new_data.get("option")
+        other_option = new_data.get("other_option")
         if ExpResult.objects.filter(exp_id=exp_id, index=index) is not None:
             ExpResult.objects.filter(exp_id=exp_id, index=index).delete()
-            ExpResult.objects.update_or_create(exp_id=exp_id,index=index,self_val=self_val,computer_val=computer_val,reaction_time=reaction_time,time=time,option=option)
+            ExpResult.objects.update_or_create(exp_id=exp_id,index=index,self_val=self_val,computer_val=computer_val,reaction_time=reaction_time,time=time,option=option,other_option=other_option)
             return JsonResponse({'status': 'success', 'message': f'Data has been saved {message}'})
     else:
         return JsonResponse({'status': 'error', 'message': 'Not post'})

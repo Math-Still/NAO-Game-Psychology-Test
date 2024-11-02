@@ -16,29 +16,56 @@ html {
     background-color: #ffffff;
 
 }
-#extraimg{
+
+#extraimg {
 
     width: 100%;
     /* 自适应父容器 */
     height: auto;
     /* 保持纵横比 */
-    max-width: 150px;
+    max-width: 300px;
     /* 设置最大宽度 */
     /* justify-content: center;
     /* 居中按钮 */
-    /* align-items: center; */ 
+    /* align-items: center; */
 
     margin: 0 auto;
-    
+
 
 }
+
+#extrap {
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#tablehead {
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#tablelap {
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif;
+}
+
 #tableimg {
     width: 100%;
     /* 自适应父容器 */
     height: auto;
     /* 保持纵横比 */
-    max-width: 400px;
+    max-width: 300px;
     /* 设置最大宽度 */
+    /* transition: opacity 0.5s ease-in-out; */
+}
+
+#starttxt {
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .showtable {
@@ -151,7 +178,8 @@ html {
     pointer-events: none;
     /* 使边框不阻止点击 */
 }
-.st-txt{
+
+.st-txt {
     font-size: 35px;
     /* width: 100%; */
     /* 占满宽度 */
@@ -168,6 +196,7 @@ html {
     transform: translate(-50%, -50%);
     /* 垂直居中 */
 }
+
 .startbt {
     background-color: #000000;
     color: white;
@@ -189,10 +218,12 @@ html {
     transform: translate(-50%, -50%);
 
 }
+
 .startbt:hover {
     background-color: darkgray;
     /* 悬停效果 */
 }
+
 .cbut {
     background-color: black;
     /* 黑色背景 */
@@ -211,13 +242,50 @@ html {
 }
 
 .button-container {
+    width: 100%;
+    /* 容器宽度占满屏幕 */
+    /* height: 100%; */
+    /* 容器高度占满屏幕 */
     display: flex;
     justify-content: center;
     /* 居中按钮 */
-    gap: 80px;
+    gap: 70px;
     /* 按钮间距 */
     margin-top: 200px;
     /* 增加上边距 */
+}
+
+.expbut {
+    background-color: black;
+    /* 黑色背景 */
+    color: white;
+    /* 白色字体 */
+    padding: 35px 50px;
+    /* 增加按钮尺寸 */
+    border: none;
+    border-radius: 5px;
+    /* 圆角边框 */
+    font-size: 15px;
+    /* 增加字体大小 */
+    /* cursor: pointer; */
+    font-family: Arial, sans-serif;
+
+
+}
+
+.exp1bt {
+    /* width: 80vw; */
+    /* 容器宽度占满屏幕 */
+    display: flex;
+    /* flex-direction: column; */
+    /* 纵向排列 */
+    
+    justify-content: center;
+    /* 居中按钮 */
+    gap: 50px;
+    /* 按钮间距 */
+    margin-top: 150px;
+    flex-wrap: wrap
 }
 
 .cbut:hover {

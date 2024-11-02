@@ -11,21 +11,25 @@ const tableimg = document.getElementById('tableimg')
 const starttxt = document.getElementById('starttxt')
 const extraimg = document.getElementById('extraimg');
 const extrap = document.getElementById('extrap');
+const container = document.getElementById('bt-con');
 const testflag = 1;
 var self_val = 0;
 var computer_val = 0;
 var reactionTime = 0;
 var self_all = 0;
 var option = 3
+var other_option = ""
 const body = document.body;
 let timeoutIds = [];
-const sel1 = document.getElementById('sel1')
+const sel1_1 = document.getElementById('sel1_1')
+const sel1_2 = document.getElementById('sel1_2')
 const sel2 = document.getElementById('sel2')
 const sel3 = document.getElementById('sel3')
 const sel4 = document.getElementById('sel4')
 const sel5 = document.getElementById('sel5')
 const sel6 = document.getElementById('sel6')
 var completedTasks = 0
+
 function say(say_text) {
     fetch('http://127.0.0.1:8000/qisay/', {
         method: 'POST',
@@ -40,6 +44,31 @@ function say(say_text) {
             console.error('set data error :', error);
         });
 }
+function savecsv() {
+    fetch('http://127.0.0.1:8000/save/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+        })
+    }).then(response => response)
+        .catch(error => {
+            console.error('save err:', error);
+        });
+}
+
+function changeImage(imgElement, newSrc) {
+    // 创建一个新的 Image 对象
+    var newImg = new Image();
+    newImg.onload = function () {
+        // 当新图片加载完成后更新 src 属性
+        imgElement.src = newSrc;
+    };
+    // 设置新图片的源地址开始加载
+    newImg.src = newSrc;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
     dynam.onclick = function () {
@@ -90,11 +119,22 @@ function get_time() {
 }
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.sel').forEach(function (element) {
+        changeImage(tableimg, 'img/nao.jpg');
+        changeImage(tableimg, 'img/computer.png');
+        changeImage(tableimg, 'img/group.png');
+        changeImage(tableimg, 'img/question.png');
         element.addEventListener('click', function (event) {
-            if (event.target.innerText === "练习") {
-                exp1()
-                sel1.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
-                sel1.style.pointerEvents = 'none'
+            if (event.target.innerText === "练习1") {
+                exp1_1()
+                sel1_1.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
+                sel1_1.style.pointerEvents = 'none'
+                completedTasks += 1
+                // your_function()
+                // delay(start, 2000);
+            } else if (event.target.innerText === "练习2") {
+                exp1_2()
+                sel1_2.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
+                sel1_2.style.pointerEvents = 'none'
                 completedTasks += 1
                 // your_function()
                 // delay(start, 2000);
@@ -133,8 +173,9 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (event.target.innerText === "最终分数") {
                 exp6()
             }
-            if (completedTasks === 5) {
-                sel1.style.display = 'none'
+            if (completedTasks === 6) {
+                sel1_1.style.display = 'none'
+                sel1_2.style.display = 'none'
                 sel2.style.display = 'none'
                 sel3.style.display = 'none'
                 sel4.style.display = 'none'
@@ -165,13 +206,13 @@ async function exp1tes() {
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < 1; i++) {
         await respond(1)
-        await setdelay(1000)
+        await setdelay(2500)
         await respond(2)
-        await setdelay(1000)
+        await setdelay(2500)
         await select1(decisions[seq[i]], self_val, computer_val, option)
         await respond(3)
         var time = get_time()
-        write(1, i, self_val, computer_val, reactionTime, time)
+        write(1, i, self_val, computer_val, reactionTime, time, other_option)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -181,6 +222,94 @@ async function exp1tes() {
     await start()
 }
 
+async function exp1_1() {
+    const decisions = [
+        { option1: { self: 10, computer: 0 } },
+        { option1: { self: 9, computer: 1 } },
+        { option1: { self: 8, computer: 2 } },
+        { option1: { self: 7, computer: 3 } },
+        { option1: { self: 6, computer: 4 } },
+        { option1: { self: 5, computer: 5 } },
+        { option1: { self: 4, computer: 6 } },
+        { option1: { self: 3, computer: 7 } },
+        { option1: { self: 2, computer: 8 } },
+        { option1: { self: 1, computer: 9 } },
+        { option1: { self: 0, computer: 10 } },
+    ];
+    // await respond(1)
+    // await setdelay(1000)
+    // await respond(2)
+    // await setdelay(1000)
+    for (var i = 1; i <= 11; i++) {
+        await respond(1)
+        await setdelay(2500)
+        // button-container
+        var buttonPromises = [];
+        const header = document.createElement('div');
+        header.className = 'header';
+        header.className = 'choice-text'
+        header.style.width = '100%'
+        header.textContent = '请做出选择'; // 添加的文本
+        container.appendChild(header); // 将文本添加到容器中
+
+
+        startTime = Date.now()
+        container.style.display = "flex"
+        taskDecision.style.display = 'none'
+        for (let i = 0; i < decisions.length; i++) {
+            const button = document.createElement('button');
+            button.innerHTML = `自己：${decisions[i].option1.self}<br>对手：${decisions[i].option1.computer}`;
+            button.className = 'expbut';
+
+            const buttonPromise = new Promise((resolve) => {
+                button.addEventListener('click', () => {
+                    resolve(i); // 解决 Promise
+                });
+            });
+            buttonPromises.push(buttonPromise);
+            container.appendChild(button);
+        }
+
+
+        dynamicDiv.style.display = 'none'
+        autoselect.style.display = 'none'
+        table.style.display = 'flex'
+        tableadd.style.display = 'none'
+        tablehead.style.display = 'none'
+        tablep.style.display = 'none'
+        tableimg.style.display = 'none'
+        taskDecision.style.display = 'none';
+        // taskDecision.inn
+        extraimg.style.display = 'block'
+        extraimg.src = 'img/question.png'
+        extraimg.style.height = 'auto';
+        extraimg.style.width = '250px';
+        extrap.innerHTML = "请做出选择"
+        extrap.style.display = 'none'
+        extrap.style.fontSize = "80px"
+        extraimg.style.display = 'none'
+
+        await Promise.race(buttonPromises).then((buttonNumber) => {
+            // 在这里执行后续代码
+            var time = get_time()
+            const endTime = Date.now();
+            reactionTime = endTime - startTime
+            write(0, i, decisions[buttonNumber].option1.self, decisions[buttonNumber].option1.computer, reactionTime, time, option, other_option)
+        });
+        container.style.display = 'none'
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+        buttonPromises = [];
+        // await respond(2)
+        // await setdelay(2500)
+        await respond(18)
+        await setdelay(2500)
+        // header.remove(); // 删除文本
+    }
+    await start()
+
+}
 async function exp1() {
     const decisions = [
         { option1: { self: 10, computer: 0 }, option2: { self: 9, computer: 1 } },
@@ -201,13 +330,13 @@ async function exp1() {
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {//seq.length
         await respond(1)
-        await setdelay(1000)
+        await setdelay(2500)
         await respond(2)
-        await setdelay(1000)
+        await setdelay(2500)
         await select1(decisions[seq[i]], self_val, computer_val)
         await respond(3)
         var time = get_time()
-        write(1, i, self_val, computer_val, reactionTime, time, option)
+        write(1, i, self_val, computer_val, reactionTime, time, option, other_option)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -216,7 +345,46 @@ async function exp1() {
     await setdelay(2000)
     await start()
 }
+async function exp1_2() {
+    const decisions = [
+        { option1: { self: 10, computer: 0 } },
+        { option1: { self: 9, computer: 1 } },
+        { option1: { self: 8, computer: 2 } },
+        { option1: { self: 7, computer: 3 } },
+        { option1: { self: 6, computer: 4 } },
+        { option1: { self: 5, computer: 5 } },
+        { option1: { self: 4, computer: 6 } },
+        { option1: { self: 3, computer: 7 } },
+        { option1: { self: 2, computer: 8 } },
+        { option1: { self: 1, computer: 9 } },
+        { option1: { self: 0, computer: 10 } },
+    ];
+    // await respond(1)
+    seq = generateRandomPermutation(decisions.length)
+    for (let i = 0; i < seq.length; i++) {
+        await respond(1)
+        await setdelay(2500)
+        await respond(17)
+        await setdelay(2000)
+        computer_val = decisions[seq[i]].option1.computer
+        self_val = decisions[seq[i]].option1.self
+        // tablep.innerText ="“" + "我得" + computer_val + " ¥，你得" + self_val + " ¥" +"”"
+        // await respond(8)
+        // await setdelay(1000)
+        await select1_2(decisions[seq[i]], self_val, computer_val)
+        var time = get_time()
+        // time=str(t)
+        write(1, i, self_val, computer_val, reactionTime, time, option, other_option)
+        // await setdelay(getRandomNumber(3000,5000))
+    }
 
+    // await setdelay(1000)
+    // respond(4)
+    // await setdelay(1000)
+    say("感谢您的决策，稍后我们将告知您本轮您的收益。")
+    await start()
+
+}
 async function exp2() {
     const decisions = [
         { option1: { self: 8, computer: 2 }, option2: { self: 7, computer: 3 } },
@@ -246,17 +414,17 @@ async function exp2() {
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {
         await respond(1)
-        await setdelay(1000)
-        await respond(5)
-        await setdelay(1000)
+        await setdelay(2500)
+        // await respond(5)
+        // await setdelay(2500)
         await select2(decisions[seq[i]], self_val, computer_val)
         await respond(6)
         var time = get_time()
         // time=str(t)
-        write(2, i, self_val, computer_val, reactionTime, time, option)
+        write(2, i, self_val, computer_val, reactionTime, time, option, other_option)
         await setdelay(getRandomNumber(3000, 5000))
     }
-    say("感谢您的决策，稍微我们将告知您本轮您的收益。")
+    say("感谢您的决策，稍后我们将告知您本轮您的收益。")
     // await setdelay(1000)
     // respond(4)
     // await setdelay(3000)
@@ -285,51 +453,51 @@ async function exp3() {
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {
         await respond(1)
-        await setdelay(1000)
+        await setdelay(2500)
         await respond(7)
-        await setdelay(1000)
+        await setdelay(2500)
         computer_val = decisions[seq[i]].option1.computer
         self_val = decisions[seq[i]].option1.self
-        tablep.innerText = "我得" + computer_val + " ¥，你得" + self_val + " ¥"
-        await respond(8)
-        await setdelay(1000)
+        // tablep.innerText ="“" + "我得" + computer_val + " ¥，你得" + self_val + " ¥" +"”"
+        // await respond(8)
+        // await setdelay(1000)
         await select3(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
-        write(3, i, self_val, computer_val, reactionTime, time, option)
+        write(3, i, self_val, computer_val, reactionTime, time, option, other_option)
         // await setdelay(getRandomNumber(3000,5000))
     }
 
     // await setdelay(1000)
     // respond(4)
     // await setdelay(1000)
-    say("感谢您的决策，稍微我们将告知您本轮您的收益。")
+    say("感谢您的决策，稍后我们将告知您本轮您的收益。")
     await start()
 
 }
 async function exp4() {
     const decisions = [
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 7, "computer": 3 } ,"choice":"1"},
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 6, "computer": 4 } ,"choice":"1"},
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 5, "computer": 5 } ,"choice":"1"},
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 4, "computer": 6 } ,"choice":"1"},
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 3, "computer": 7 } ,"choice":"1"},
-        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 8, "computer": 2 } ,"choice":"0"},
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 6, "computer": 4 } ,"choice":"1"},
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 5, "computer": 5 } ,"choice":"1"},
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 4, "computer": 6 } ,"choice":"1"},
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 7, "computer": 3 } ,"choice":"0"},
-        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 7, "computer": 3 } ,"choice":"0"},
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 5, "computer": 5 } ,"choice":"1"},
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } ,"choice":"0"},
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } ,"choice":"0"},
-        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 6, "computer": 4 } ,"choice":"0"},
-        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } ,"choice":"0"},
-        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } ,"choice":"0"},
-        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 5, "computer": 5 } ,"choice":"0"},
-        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 4, "computer": 6 } ,"choice":"0"},
-        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 4, "computer": 6 } ,"choice":"0"},
-        { "option1": { "self": 3, "computer": 7 }, "option2": { "self": 3, "computer": 7 } ,"choice":"0"}
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 7, "computer": 3 }, "choice": "1" },
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 6, "computer": 4 }, "choice": "1" },
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 5, "computer": 5 }, "choice": "1" },
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 4, "computer": 6 }, "choice": "1" },
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 3, "computer": 7 }, "choice": "1" },
+        { "option1": { "self": 8, "computer": 2 }, "option2": { "self": 2, "computer": 8 }, "choice": "0" },
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 6, "computer": 4 }, "choice": "1" },
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 5, "computer": 5 }, "choice": "1" },
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 4, "computer": 6 }, "choice": "1" },
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 3, "computer": 7 }, "choice": "0" },
+        { "option1": { "self": 7, "computer": 3 }, "option2": { "self": 2, "computer": 8 }, "choice": "0" },
+        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 5, "computer": 5 }, "choice": "1" },
+        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 4, "computer": 6 }, "choice": "0" },
+        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 3, "computer": 7 }, "choice": "0" },
+        { "option1": { "self": 6, "computer": 4 }, "option2": { "self": 2, "computer": 8 }, "choice": "0" },
+        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 4, "computer": 6 }, "choice": "0" },
+        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 3, "computer": 7 }, "choice": "0" },
+        { "option1": { "self": 5, "computer": 5 }, "option2": { "self": 2, "computer": 8 }, "choice": "0" },
+        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 3, "computer": 7 }, "choice": "0" },
+        { "option1": { "self": 4, "computer": 6 }, "option2": { "self": 2, "computer": 8 }, "choice": "0" },
+        { "option1": { "self": 3, "computer": 7 }, "option2": { "self": 2, "computer": 8 }, "choice": "0" }
     ];
     // await respond(1)
     // await setdelay(1000)
@@ -341,35 +509,36 @@ async function exp4() {
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {//seq.length
         await respond(1)
-        await setdelay(1000)
-        await respond(9)
-        await setdelay(1000)
+        await setdelay(2500)
+        // await respond(9)
+        // await setdelay(2500)
         await select4(decisions[seq[i]], self_val, computer_val)
         await respond(10)
         var time = get_time()
-        write(4, i, self_val, computer_val, reactionTime, time, option)
+        write(4, i, self_val, computer_val, reactionTime, time, option, other_option)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
     }
-    respond(4)
-    await setdelay(2000)
+    // respond(4)
+    // await setdelay(2000)
+    say("感谢您的决策，稍后我们将告知您本轮您的收益。")
     await start()
 }
 async function exp5() {
     const decisions = [
         { option1: { self: 8, computer: 2, choice: 0 } },
         { option1: { self: 7, computer: 3, choice: 0 } },
-        { option1: { self: 6, computer: 4, choice: 1 } },
-        { option1: { self: 5, computer: 5, choice: 1 } },
-        { option1: { self: 4, computer: 6, choice: 1 } },
+        { option1: { self: 6, computer: 4, choice: 0 } },
+        { option1: { self: 5, computer: 5, choice: 0 } },
+        { option1: { self: 4, computer: 6, choice: 0 } },
         { option1: { self: 3, computer: 7, choice: 1 } },
         { option1: { self: 2, computer: 8, choice: 1 } },
         { option1: { self: 8, computer: 2, choice: 0 } },
         { option1: { self: 7, computer: 3, choice: 0 } },
-        { option1: { self: 6, computer: 4, choice: 1 } },
-        { option1: { self: 5, computer: 5, choice: 1 } },
-        { option1: { self: 4, computer: 6, choice: 1 } },
+        { option1: { self: 6, computer: 4, choice: 0 } },
+        { option1: { self: 5, computer: 5, choice: 0 } },
+        { option1: { self: 4, computer: 6, choice: 0 } },
         { option1: { self: 3, computer: 7, choice: 1 } },
         { option1: { self: 2, computer: 8, choice: 1 } },
     ];
@@ -382,31 +551,33 @@ async function exp5() {
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {
         await respond(1)
-        await setdelay(1000)
+        await setdelay(2500)
         await respond(10)
-        await setdelay(1000)
+        await setdelay(2500)
         computer_val = decisions[seq[i]].option1.computer
         self_val = decisions[seq[i]].option1.self
-        await respond(11)
+        // await respond(11)
 
-        tablep.innerText = "我得" + computer_val + " ¥，你得" + self_val + " ¥"
+        // tablep.innerText = "“" + "我们得" + computer_val + " ¥，你们得" + self_val + " ¥"+ "”"
 
-        await setdelay(1000)
+        // await setdelay(1000)
         await select5(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
-        write(5, i, self_val, computer_val, reactionTime, time, option)
-        // await setdelay(getRandomNumber(3000,5000))
+        write(5, i, self_val, computer_val, reactionTime, time, option, other_option)
+        // await setdelay(2000)
     }
     // await setdelay(1000)
     // respond(4)
     // await setdelay(3000)
-    say("感谢您的决策，稍微我们将告知您本轮您的收益")
+    say("感谢您的决策，稍后我们将告知您本轮您的收益")
     await start()
 
 }
 async function exp6() {
+    savecsv()
     await respond(16)
+
 }
 // const tablehead
 // const tablep 
@@ -471,17 +642,17 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         starttxt.innerText = "您的总收益为：" + self_all + " ¥";
         starttxt.style.display = 'flex'
         dynam.style.display = 'none'
-    } else if (option === 5) {
-        dynamicDiv.style.display = 'none'
-        autoselect.style.display = 'none'
-        taskDecision.style.display = 'none'
-        table.style.display = 'flex'
-        tableadd.style.display = 'none'
-        tablehead.style.display = 'flex'
-        tablehead.innerText = "响应者-NAO"
-        tablep.style.display = 'none'
-        tableimg.style.display = 'flex'
-        tableimg.src = 'img/nao.jpg'
+        // } else if (option === 5) {
+        //     dynamicDiv.style.display = 'none'
+        //     autoselect.style.display = 'none'
+        //     taskDecision.style.display = 'none'
+        //     table.style.display = 'flex'
+        //     tableadd.style.display = 'none'
+        //     tablehead.style.display = 'flex'
+        //     tablehead.innerText = "响应者-NAO"
+        //     tablep.style.display = 'none'
+        //     tableimg.style.display = 'flex'
+        //     tableimg.src = 'img/nao.jpg'
         // dynam.innerText = "响应者-NAO"
     } else if (option === 6) {
         dynamicDiv.style.display = 'none'
@@ -493,7 +664,10 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         tablehead.innerText = "响应者-NAO"
         tablep.style.display = 'flex'
         tablep.innerText = '请稍等，NAO正在进行决策'
-        tableimg.style.display = 'none'
+        tableimg.style.display = 'flex'
+        tableimg.src = 'img/nao.jpg'
+        tableimg.width = '300px'
+
         // dynam.innerText = "请等待，NAO正在决策"
     } else if (option === 7) {
         dynamicDiv.style.display = 'none'
@@ -502,10 +676,21 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         table.style.display = 'flex'
         tableadd.style.display = 'none'
         tablehead.style.display = 'flex'
-        tablehead.innerText = "提议者-NAO"
-        tablep.style.display = 'none'
-        tableimg.style.display = 'flex'
-        tableimg.src = 'img/nao.jpg'
+        tablehead.innerText = "响应者-NAO"
+        tablep.style.display = 'flex'
+        tablep.innerText = '请稍等，NAO正在进行决策'
+        // tableimg.style.display = 'none'
+        // dynamicDiv.style.display = 'none'
+        // autoselect.style.display = 'none'
+        // taskDecision.style.display = 'none'
+        // table.style.display = 'flex'
+        // tableadd.style.display = 'none'
+        // tablehead.style.display = 'flex'
+        // tablehead.innerText = "提议者-NAO"
+        // tablep.style.display = 'none'
+        // tableimg.style.display = 'flex'
+        // tableimg.src = 'img/nao.jpg'
+
         //实验3的nao作为提议者 stage2
     } else if (option === 8) {
         dynamicDiv.style.display = 'none'
@@ -542,6 +727,8 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         tablep.style.display = 'flex'
         tablep.innerText = '请等待，对方正在决策'
         tableimg.style.display = 'none'
+        tableimg.style.display = 'flex'
+        tableimg.src = 'img/group.png'
         //4 3
     } else if (option === 11) {
         dynamicDiv.style.display = 'none'
@@ -645,11 +832,42 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         tablep.innerText = "您的总收益为：" + getRandomNumber(160, 200) + " ¥\n\n" + "您的排名为： 26/32 "
         tableimg.style.display = 'none'
     } else if (option === 17) {
+        dynamicDiv.style.display = 'none'
+        autoselect.style.display = 'none'
+        taskDecision.style.display = 'none'
+        table.style.display = 'flex'
+        tableadd.style.display = 'none'
+        tablehead.style.display = 'flex'
+        tablehead.innerText = "提议者"
+        tablep.style.display = 'flex'
+        tablep.innerText = '提议者正在进行决策'
+        tableimg.style.display = 'flex'
+        tableimg.src = 'img/question.png'
+    } else if (option === 18) {
+        dynamicDiv.style.display = 'none'
+        autoselect.style.display = 'none'
+        taskDecision.style.display = 'none'
+        table.style.display = 'flex'
+        tableadd.style.display = 'none'
+        tablehead.style.display = 'flex'
+        tablehead.innerText = "响应者"
+        tablep.style.display = 'flex'
+        tablep.innerText = '响应者正在进行决策'
+        tableimg.style.display = 'flex'
+        tableimg.src = 'img/question.png'
+    } else if (option === 20) {
+
+    } else if (option === 21) {
+
+    } else if (option === 22) {
+
+    } else if (option === 23) {
 
     }
+
 }
 
-function write(exp_id, index, self_val, computer_val, reaction_time, time, option) {
+function write(exp_id, index, self_val, computer_val, reaction_time, time, option, other_option) {
     fetch('http://127.0.0.1:8000/set_exp/', {
         method: 'POST',
         headers: {
@@ -663,6 +881,7 @@ function write(exp_id, index, self_val, computer_val, reaction_time, time, optio
             reaction_time: reaction_time,
             time: time,
             option: option,
+            other_option: other_option,
         })
     }).then(response => response)
         .catch(error => {
@@ -699,6 +918,7 @@ async function select1(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            other_option = decisions.option2
             option = 0
             resolve(); // 解析 Promise，继续执行
         };
@@ -710,11 +930,75 @@ async function select1(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            other_option = decisions.option1
             option = 1
             resolve(); // 解析 Promise，继续执行
         };
     })
 }
+
+async function select1_2(decisions) {
+    dynamicDiv.style.display = 'none'
+    autoselect.style.display = 'none'
+    table.style.display = 'flex'
+    tableadd.style.display = 'none'
+    tablehead.style.display = 'none'
+    tablep.style.display = 'none'
+    tableimg.style.display = 'none'
+    taskDecision.style.display = 'block';
+    // taskDecision.inn
+    extraimg.style.display = 'block'
+    extraimg.src = 'img/question.png'
+    extraimg.style.height = 'auto';
+    extraimg.style.width = '250px';
+    extrap.innerHTML = "“" + "我得" + decisions.option1.computer + " ¥，你得" + decisions.option1.self + " ¥" + "”"
+    extrap.style.display = 'block'
+    extrap.style.fontSize = "50px"
+
+    // if (decisions.option1.choice === 1) {
+    //     bt1.classList.add('button-bordered');
+    // } else {
+    //     bt2.classList.add('button-bordered');
+    // }
+    bt1 = document.getElementById('bt1');
+    bt2 = document.getElementById('bt2');
+    bt1.innerHTML = "接受"
+    bt2.innerHTML = "拒绝"
+    const startTime = Date.now(); // 记录开始时间
+    return new Promise(resolve => {
+        // 为按钮添加点击事件
+        bt1.onclick = () => {
+            // 处理按钮1点击
+            const endTime = Date.now(); // 记录结束时间
+            reactionTime = endTime - startTime; // 计算反应时间
+            self_val = decisions.option1.self
+            self_all += self_val
+            computer_val = decisions.option1.computer
+            option = 0
+            extrap.innerHTML = "请做出选择"
+            extrap.style.display = 'none'
+            extrap.style.fontSize = "80px"
+            extraimg.style.display = 'none'
+            resolve(); // 解析 Promise，继续执行
+        };
+
+        bt2.onclick = () => {
+            // 处理按钮2点击
+            const endTime = Date.now(); // 记录结束时间
+            reactionTime = endTime - startTime; // 计算反应时间
+            self_val = decisions.option1.self
+            self_all += self_val
+            computer_val = decisions.option1.computer
+            option = 1
+            extrap.innerHTML = "请做出选择"
+            extrap.style.display = 'none'
+            extrap.style.fontSize = "80px"
+            extraimg.style.display = 'none'
+            resolve(); // 解析 Promise，继续执行
+        };
+    })
+}
+
 
 async function select2(decisions) {
     dynamicDiv.style.display = 'none'
@@ -739,6 +1023,7 @@ async function select2(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            other_option = decisions.option2
             option = 0
             resolve(); // 解析 Promise，继续执行
         };
@@ -750,6 +1035,7 @@ async function select2(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            other_option = decisions.option1
             option = 1
             resolve(); // 解析 Promise，继续执行
         };
@@ -766,11 +1052,18 @@ async function select3(decisions) {
     taskDecision.style.display = 'block';
     // taskDecision.inn
     extraimg.style.display = 'block'
-    extraimg.src='img/nao.jpg'
-    extrap.innerHTML = "我得" + decisions.option1.computer + " ¥，你得" + decisions.option1.self + " ¥"
+    extraimg.src = 'img/nao.jpg'
+    extraimg.style.height = 'auto';
+    extraimg.style.width = '250px';
+    extrap.innerHTML = "“" + "我得" + decisions.option1.computer + " ¥，你得" + decisions.option1.self + " ¥" + "”"
     extrap.style.display = 'block'
     extrap.style.fontSize = "50px"
 
+    // if (decisions.option1.choice === 1) {
+    //     bt1.classList.add('button-bordered');
+    // } else {
+    //     bt2.classList.add('button-bordered');
+    // }
     bt1 = document.getElementById('bt1');
     bt2 = document.getElementById('bt2');
     bt1.innerHTML = "接受"
@@ -841,9 +1134,14 @@ async function select4(decisions) {
             self_val = decisions.option1.self
             self_all += self_val
             computer_val = decisions.option1.computer
+            other_option = decisions.option2
             option = 0
             bt1.classList.remove('button-bordered');
             bt2.classList.remove('button-bordered');
+            // extrap.innerHTML = "请做出选择"
+            // extrap.style.display = 'none'
+            // extrap.style.fontSize = "80px"
+            // extraimg.style.display = 'none'
             resolve(); // 解析 Promise，继续执行
         };
 
@@ -854,9 +1152,14 @@ async function select4(decisions) {
             self_val = decisions.option2.self
             self_all += self_val
             computer_val = decisions.option2.computer
+            other_option = decisions.option1
             option = 1
             bt1.classList.remove('button-bordered');
             bt2.classList.remove('button-bordered');
+            // extrap.innerHTML = "请做出选择"
+            // extrap.style.display = 'none'
+            // extrap.style.fontSize = "80px"
+            // extraimg.style.display = 'none'
             resolve(); // 解析 Promise，继续执行
         };
     })
@@ -872,15 +1175,17 @@ async function select5(decisions) {
     tableimg.style.display = 'none'
     taskDecision.style.display = 'block';
     extraimg.style.display = 'block'
-    extraimg.src='img/nao.jpg'
-    extrap.innerHTML = "我得" + decisions.option1.computer + " ¥，你得" + decisions.option1.self + " ¥"
+    extraimg.src = 'img/group.png'
+    extraimg.style.height = 'auto';
+    extraimg.style.width = '250px';
+    extrap.innerHTML = "“" + "我们得" + decisions.option1.computer + " ¥，你们得" + decisions.option1.self + " ¥" + "”"
     extrap.style.display = 'block'
     extrap.style.fontSize = "50px"
     // taskDecision.inn
     bt1 = document.getElementById('bt1');
     bt2 = document.getElementById('bt2');
 
-    if (decisions.option1.choice === 1) {
+    if (decisions.option1.choice === 0) {
         bt1.classList.add('button-bordered');
     } else {
         bt2.classList.add('button-bordered');
