@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import request_view,set_view,set_exp,get_exp,get_image,qisay,setip
+from .views import request_view,set_view,set_exp,get_exp,get_image,qisay,setip,save
 
 urlpatterns = [
     # path('getdata/', request_view , name = 'request_view'),
@@ -9,6 +9,6 @@ urlpatterns = [
     path('img/<str:image_name>/', get_image, name='get_image'),
     path('qisay/',qisay),
     path('setip/<str:ip>/',setip),
-    
+    path('save/',save)
 
 ]
