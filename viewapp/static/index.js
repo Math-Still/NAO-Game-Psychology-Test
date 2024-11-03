@@ -1,6 +1,9 @@
 const dynamicDiv = document.getElementById('dynamicDiv');
 const autoselect = document.getElementById('autoselect');
 const taskDecision = document.getElementById('taskDecision')
+const input = document.getElementById('input1')
+const select11 = document.getElementById('select1')
+const select22 = document.getElementById('select2')
 const dynam = document.getElementById('dynam')
 const all = document.getElementById('all')
 const tablehead = document.getElementById('tablehead')
@@ -13,11 +16,18 @@ const extraimg = document.getElementById('extraimg');
 const extrap = document.getElementById('extrap');
 const container = document.getElementById('bt-con');
 const testflag = 1;
+const welcome = document.getElementById('welcome')
+const qinmidu = document.getElementById('QinMiDu')
 var self_val = 0;
 var computer_val = 0;
 var reactionTime = 0;
 var self_all = 0;
+var Sortednumber;
 var option = 3
+var qinmiduValue;
+//亲密度选择
+var inputValue;
+//实验编号
 var other_option = ""
 const body = document.body;
 let timeoutIds = [];
@@ -28,6 +38,8 @@ const sel3 = document.getElementById('sel3')
 const sel4 = document.getElementById('sel4')
 const sel5 = document.getElementById('sel5')
 const sel6 = document.getElementById('sel6')
+const sel7 = document.getElementById('sel7')
+const sel8 = document.getElementById('sel8')
 var completedTasks = 0
 
 function say(say_text) {
@@ -115,76 +127,137 @@ function get_time() {
         hour12: false // 24小时制
     };
     return date.toLocaleString('zh-CN', options);
-
 }
+async function Choose() {
+    sel1_1.style.display = 'none'
+    sel1_2.style.display = 'none'
+}
+
+// select22.style.display = 'block';
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.sel').forEach(function (element) {
-        changeImage(tableimg, 'img/nao.jpg');
-        changeImage(tableimg, 'img/computer.png');
-        changeImage(tableimg, 'img/group.png');
-        changeImage(tableimg, 'img/question.png');
-        element.addEventListener('click', function (event) {
-            if (event.target.innerText === "练习1") {
-                exp1_1()
-                sel1_1.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
-                sel1_1.style.pointerEvents = 'none'
-                completedTasks += 1
-                // your_function()
-                // delay(start, 2000);
-            } else if (event.target.innerText === "练习2") {
-                exp1_2()
-                sel1_2.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
-                sel1_2.style.pointerEvents = 'none'
-                completedTasks += 1
-                // your_function()
-                // delay(start, 2000);
-            } else if (event.target.innerText === "实验1") {
-                exp2()
-                sel2.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
-                sel2.style.pointerEvents = 'none'
-                completedTasks += 1
 
-                // your_function()
-                // delay(start, 2000);
-            } else if (event.target.innerText === "实验2") {
-                exp3()
-                sel3.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
-                sel3.style.pointerEvents = 'none'
-                completedTasks += 1
+    changeImage(tableimg, 'img/nao,jpg')
+    changeImage(tableimg, 'img/3.png')
+    changeImage(tableimg, 'img/6.png')
+    changeImage
+    changeImage(tableimg, 'img/nao,jpg')
+    changeImage
+    function handleSelClick(event) {
+        const target = event.target;
+        if (target.innerText === '练习任务') {
+            Choose();
+            sel1_1.style.backgroundColor = '#ccc';
+            sel1_1.style.pointerEvents = 'none';
+            sel1_1.style.display = 'none';
+            sel1_2.style.display = 'none';
+            select11.style.display = 'block';
+        } else if (target.innerText === '正式任务') {
+            console.log("Clicked: 正式任务");
+            // 显示欢迎页面
+            document.getElementById('welcome').style.display = 'block';
 
-                // your_function()
-                // delay(start, 2000);
-            } else if (event.target.innerText === "实验3") {
-                exp4()
-                sel4.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
-                sel4.style.pointerEvents = 'none'
-                completedTasks += 1
+            // 隐藏其他选项
+            sel1_1.style.display = 'none';
+            sel1_2.style.display = 'none';
+        }
+    }
 
-                // your_function()
-                // delay(start, 2000);
-            } else if (event.target.innerText === "实验4") {
-                exp5()
-                sel5.style.backgroundColor = '#ccc'; // 更改按钮颜色表示完成
-                sel5.style.pointerEvents = 'none'
-                completedTasks += 1
-
-                // your_function()
-                // delay(start, 2000);
-            } else if (event.target.innerText === "最终分数") {
-                exp6()
-            }
-            if (completedTasks === 6) {
-                sel1_1.style.display = 'none'
-                sel1_2.style.display = 'none'
-                sel2.style.display = 'none'
-                sel3.style.display = 'none'
-                sel4.style.display = 'none'
-                sel5.style.display = 'none'
-                document.getElementById('sel6').style.display = 'flex';
-            }
-        });
+    document.getElementById('startDiv').addEventListener('click', function () {
+        // 隐藏欢迎页面并显示另一个界面
+        document.getElementById('welcome').style.display = 'none';
+        qinmidu.style.display = 'block';
     });
+
+    document.getElementById('anotherStartDiv').addEventListener('click', function () {
+        // 隐藏另一个界面并显示实验选择界面
+        qinmidu.style.display = 'none';
+        select22.style.display = 'block';
+    });
+
+    document.querySelectorAll('.sel').forEach(element => {
+        element.addEventListener('click', handleSelClick);
+    });
+
+    // 为 select1 中的按钮添加点击事件
+    select11.addEventListener('click', function () {
+        select11.style.display = 'none';
+        exp1();
+    });
+
+    // 为 select2 中的按钮添加点击事件
+    document.querySelectorAll('.sel').forEach(element => {
+        element.addEventListener('click', handleOselClick);
+    });
+
+    function handleOselClick(event) {
+        const target = event.target;
+        if (target.innerText === '实验1') {
+            select22.style.display = 'none';
+            hideButtons();
+            // completedTasks += 1;
+            console.log(completedTasks)
+            exp2();
+            completedTasks += 1;
+        } else if (target.innerText === '实验2') {
+            select22.style.display = 'none';
+            hideButtons();
+            // completedTasks += 1;
+            console.log(completedTasks)
+            exp3();
+            completedTasks += 1;
+        } else if (target.innerText === '实验3') {
+            select22.style.display = 'none';
+            hideButtons();
+            // completedTasks += 1;
+            console.log(completedTasks)
+            exp4();
+            completedTasks += 1;
+        } else if (target.innerText === '实验4') {
+            select22.style.display = 'none';
+            hideButtons();
+            // completedTasks += 1;
+            console.log(completedTasks)
+            exp5();
+            completedTasks += 1;
+            select22.style.display = 'block';
+        } else if (target.innerText === '最终分数') {
+            exp6();
+            document.getElementById('sel6').style.display = 'none';
+        }
+
+        if (completedTasks === 4) {
+            hideAllSelButtons();
+            document.getElementById('sel6').style.display = 'flex';
+        }
+    }
+
+    function hideButtons() {
+        sel3.style.display = 'none';
+        sel2.style.display = 'none';
+        sel4.style.display = 'none';
+        sel5.style.display = 'none';
+        sel6.style.display = 'none';
+        sel7.style.display = 'none';
+        sel8.style.display = 'none';
+        input.style.display = 'none';
+        welcome.style.display = 'none';
+    }
+
+    function hideAllSelButtons() {
+        sel1_1.style.display = 'none';
+        sel1_2.style.display = 'none';
+        sel3.style.display = 'none';
+        sel2.style.display = 'none';
+        sel4.style.display = 'none';
+        sel5.style.display = 'none';
+        sel6.style.display = 'none';
+        sel7.style.display = 'none';
+        sel8.style.display = 'none';
+        input.style.display = 'none';
+        welcome.style.display = 'none';
+    }
 });
+
 
 async function exp1tes() {
     const decisions = [
@@ -212,7 +285,7 @@ async function exp1tes() {
         await select1(decisions[seq[i]], self_val, computer_val, option)
         await respond(3)
         var time = get_time()
-        write(1, i, self_val, computer_val, reactionTime, time, other_option)
+        write(1, i, self_val, computer_val, reactionTime, time, other_option,inputValue,qinmidu)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -240,7 +313,7 @@ async function exp1_1() {
     // await setdelay(1000)
     // await respond(2)
     // await setdelay(1000)
-    for (var i = 1; i <= 11; i++) {
+    for (var i = 1; i <= 5; i++) {
         await respond(1)
         await setdelay(2500)
         // button-container
@@ -249,7 +322,7 @@ async function exp1_1() {
         header.className = 'header';
         header.className = 'choice-text'
         header.style.width = '100%'
-        header.textContent = '请做出选择'; // 添加的文本
+        header.textContent = '请做出您的选择'; // 添加的文本
         container.appendChild(header); // 将文本添加到容器中
 
 
@@ -258,8 +331,9 @@ async function exp1_1() {
         taskDecision.style.display = 'none'
         for (let i = 0; i < decisions.length; i++) {
             const button = document.createElement('button');
-            button.innerHTML = `自己：${decisions[i].option1.self}<br>对手：${decisions[i].option1.computer}`;
+            button.innerHTML = `自己：${decisions[i].option1.self}<br>对手：${decisions[i].option1.computer}`
             button.className = 'expbut';
+
 
             const buttonPromise = new Promise((resolve) => {
                 button.addEventListener('click', () => {
@@ -294,7 +368,7 @@ async function exp1_1() {
             var time = get_time()
             const endTime = Date.now();
             reactionTime = endTime - startTime
-            write(0, i, decisions[buttonNumber].option1.self, decisions[buttonNumber].option1.computer, reactionTime, time, option, other_option)
+            write(0, i, decisions[buttonNumber].option1.self, decisions[buttonNumber].option1.computer, reactionTime, time, option, other_option,inputValue,qinmidu)
         });
         container.style.display = 'none'
         while (container.firstChild) {
@@ -310,18 +384,16 @@ async function exp1_1() {
     await start()
 
 }
+// async function exercise() {
+
+// }
 async function exp1() {
     const decisions = [
-        { option1: { self: 10, computer: 0 }, option2: { self: 9, computer: 1 } },
         { option1: { self: 9, computer: 1 }, option2: { self: 8, computer: 2 } },
-        { option1: { self: 8, computer: 2 }, option2: { self: 7, computer: 3 } },
-        { option1: { self: 7, computer: 3 }, option2: { self: 6, computer: 4 } },
         { option1: { self: 6, computer: 4 }, option2: { self: 5, computer: 5 } },
         { option1: { self: 5, computer: 5 }, option2: { self: 4, computer: 6 } },
-        { option1: { self: 4, computer: 6 }, option2: { self: 3, computer: 7 } },
         { option1: { self: 3, computer: 7 }, option2: { self: 2, computer: 8 } },
         { option1: { self: 2, computer: 8 }, option2: { self: 1, computer: 9 } },
-        { option1: { self: 1, computer: 9 }, option2: { self: 0, computer: 10 } },
     ];
     // await respond(1)
     // await setdelay(1000)
@@ -331,33 +403,29 @@ async function exp1() {
     for (let i = 0; i < seq.length; i++) {//seq.length
         await respond(1)
         await setdelay(2500)
-        await respond(2)
-        await setdelay(2500)
+        // await respond(2)
+        // await setdelay(2500)
         await select1(decisions[seq[i]], self_val, computer_val)
-        await respond(3)
+        await respond(18)
         var time = get_time()
-        write(1, i, self_val, computer_val, reactionTime, time, option, other_option)
+        write(1, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
     }
     respond(4)
     await setdelay(2000)
+    welcome.style.display = 'block';
     await start()
 }
 async function exp1_2() {
     const decisions = [
-        { option1: { self: 10, computer: 0 } },
         { option1: { self: 9, computer: 1 } },
-        { option1: { self: 8, computer: 2 } },
         { option1: { self: 7, computer: 3 } },
-        { option1: { self: 6, computer: 4 } },
         { option1: { self: 5, computer: 5 } },
-        { option1: { self: 4, computer: 6 } },
         { option1: { self: 3, computer: 7 } },
         { option1: { self: 2, computer: 8 } },
-        { option1: { self: 1, computer: 9 } },
-        { option1: { self: 0, computer: 10 } },
+
     ];
     // await respond(1)
     seq = generateRandomPermutation(decisions.length)
@@ -374,14 +442,10 @@ async function exp1_2() {
         await select1_2(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
-        write(1, i, self_val, computer_val, reactionTime, time, option, other_option)
+        write(1, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
         // await setdelay(getRandomNumber(3000,5000))
     }
-
-    // await setdelay(1000)
-    // respond(4)
-    // await setdelay(1000)
-    say("感谢您的决策，稍后我们将告知您本轮您的收益。")
+    welcome.style.display = 'block';
     await start()
 
 }
@@ -409,28 +473,37 @@ async function exp2() {
         { option1: { self: 4, computer: 6 }, option2: { self: 2, computer: 8 } },
         { option1: { self: 3, computer: 7 }, option2: { self: 2, computer: 8 } },
     ];
-    say("在本次任务中，您将与我进行一场资源分配任务。在此次任务中，您将作为提议者，负责提出资源分配的方案。我将作为响应者，对您的提议作出接受或拒绝的决策。")
-    await respond(12)
-    seq = generateRandomPermutation(decisions.length)
+
+    imageContainer.innerHTML = `<img src="http://127.0.0.1:8000/img/44.png" alt="Example Image" style="width: 600px; height: auto;">`;
+    await respond(12);
+    seq = generateRandomPermutation(decisions.length);
     for (let i = 0; i < seq.length; i++) {
-        await respond(1)
-        await setdelay(2500)
+        await respond(1);
+        await setdelay(2500);
         // await respond(5)
         // await setdelay(2500)
-        await select2(decisions[seq[i]], self_val, computer_val)
-        await respond(6)
-        var time = get_time()
+        await select2(decisions[seq[i]], self_val, computer_val);
+        await respond(6);
+        var time = get_time();
         // time=str(t)
-        write(2, i, self_val, computer_val, reactionTime, time, option, other_option)
-        await setdelay(getRandomNumber(3000, 5000))
-    }
-    say("感谢您的决策，稍后我们将告知您本轮您的收益。")
-    // await setdelay(1000)
-    // respond(4)
-    // await setdelay(3000)
-    await start()
+        write(2, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu );
+        await setdelay(getRandomNumber(3000, 5000));
 
+        // 添加显示图片的逻辑
+        const imageContainer = document.getElementById('imageContainer');
+
+    }
+    say("感谢您的决策，稍后我们将告知您本轮您的收益。");
+    select22.style.display = 'block';
+    sel4.style.display = 'block';
+    sel5.style.display = 'block';
+    // sel6.style.display = 'none';
+    sel7.style.display = 'block';
+    sel8.style.display = 'block';
+    await start();
 }
+
+
 async function exp3() {
     const decisions = [
         { option1: { self: 8, computer: 2 } },
@@ -448,7 +521,7 @@ async function exp3() {
         { option1: { self: 3, computer: 7 } },
         { option1: { self: 2, computer: 8 } },
     ];
-    say("在本次任务中，您将与我进行一场最后通牒博弈。在博弈中，我将作为提议者，负责提出资源分配的方案。您将作为响应者，对我的提议作出接受或拒绝的决策。")
+    imageContainer.innerHTML = `<img src="http://127.0.0.1:8000/img/11.png" alt="Example Image" style="width: 600px; height: auto;">`;
     await respond(13)
     seq = generateRandomPermutation(decisions.length)
     for (let i = 0; i < seq.length; i++) {
@@ -464,7 +537,7 @@ async function exp3() {
         await select3(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
-        write(3, i, self_val, computer_val, reactionTime, time, option, other_option)
+        write(3, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
         // await setdelay(getRandomNumber(3000,5000))
     }
 
@@ -472,6 +545,12 @@ async function exp3() {
     // respond(4)
     // await setdelay(1000)
     say("感谢您的决策，稍后我们将告知您本轮您的收益。")
+    select22.style.display = 'block';
+    sel4.style.display = 'block';
+    sel5.style.display = 'block';
+    // sel6.style.display = 'none';
+    sel7.style.display = 'block';
+    sel8.style.display = 'block';
     await start()
 
 }
@@ -503,7 +582,8 @@ async function exp4() {
     // await setdelay(1000)
     // await respond(2)
     // await setdelay(1000)
-    say("在本次任务中，您将与我组成团队，共同参与一场博弈，我将在博弈过程中提供建议和策略支持。然而，最终的提议和决策由你来决定。")
+    // say("在本次任务中，您将与我组成团队，共同参与一场博弈，我将在博弈过程中提供建议和策略支持。然而，最终的提议和决策由你来决定。")
+    imageContainer.innerHTML = `<img src="http://127.0.0.1:8000/img/33.png" alt="Example Image" style="width: 900px; height: auto;">`;
     await respond(14)
 
     seq = generateRandomPermutation(decisions.length)
@@ -515,7 +595,7 @@ async function exp4() {
         await select4(decisions[seq[i]], self_val, computer_val)
         await respond(10)
         var time = get_time()
-        write(4, i, self_val, computer_val, reactionTime, time, option, other_option)
+        write(4, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -523,6 +603,12 @@ async function exp4() {
     // respond(4)
     // await setdelay(2000)
     say("感谢您的决策，稍后我们将告知您本轮您的收益。")
+    select22.style.display = 'block';
+    sel4.style.display = 'block';
+    sel5.style.display = 'block';
+    // sel6.style.display = 'none';
+    sel7.style.display = 'block';
+    sel8.style.display = 'block';
     await start()
 }
 async function exp5() {
@@ -542,10 +628,11 @@ async function exp5() {
         { option1: { self: 3, computer: 7, choice: 1 } },
         { option1: { self: 2, computer: 8, choice: 1 } },
     ];
-    say("在本次任务中，您将与我协作与其他团队进行一场博弈。您将扮演接受者的角色，我会给您提供建议，您可以基于我的建议做出决策。")
+    // say("在本次任务中，您将与我协作与其他团队进行一场博弈。您将扮演接受者的角色，我会给您提供建议，您可以基于我的建议做出决策。")
     // await respond(10)
     // await respond(11)
     // await setdelay(100000000)
+    imageContainer.innerHTML = `<img src="http://127.0.0.1:8000/img/22.png" alt="Example Image" style="width: 900px; height: auto;">`;
     await respond(15)
 
     seq = generateRandomPermutation(decisions.length)
@@ -564,13 +651,19 @@ async function exp5() {
         await select5(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
-        write(5, i, self_val, computer_val, reactionTime, time, option, other_option)
+        write(5, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
         // await setdelay(2000)
     }
     // await setdelay(1000)
     // respond(4)
     // await setdelay(3000)
     say("感谢您的决策，稍后我们将告知您本轮您的收益")
+    select22.style.display = 'block';
+    sel4.style.display = 'block';
+    sel5.style.display = 'block';
+    // sel6.style.display = 'none';
+    sel7.style.display = 'block';
+    sel8.style.display = 'block';
     await start()
 
 }
@@ -623,9 +716,9 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         table.style.display = 'flex'
         tableadd.style.display = 'none'
         tablehead.style.display = 'flex'
-        tablehead.innerText = "响应者-电脑"
+        tablehead.innerText = "响应者"
         tablep.style.display = 'flex'
-        tablep.innerText = '电脑正在进行决策'
+        tablep.innerText = '响应者正在进行决策'
         tableimg.style.display = 'none'
         // tableimg.src = '{% static "img/computer.png" %}'
 
@@ -665,7 +758,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         tablep.style.display = 'flex'
         tablep.innerText = '请稍等，NAO正在进行决策'
         tableimg.style.display = 'flex'
-        tableimg.src = 'img/nao.jpg'
+        tableimg.src = 'img/nao.jpg'//'img/nao.jpgimg/Blue-NAO.png'
         tableimg.width = '300px'
 
         // dynam.innerText = "请等待，NAO正在决策"
@@ -702,7 +795,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         // tablehead.innerText = "提议者-NAO"
         tablep.style.display = 'flex'
         tableimg.style.display = 'flex'
-        tableimg.src = 'img/nao.jpg'
+        tableimg.src = 'img/nao.jpg' //'img/nao.jpgimg/Blue-NAO.png'
         //实验3
     } else if (option === 9) {
         dynamicDiv.style.display = 'none'
@@ -744,6 +837,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         //5 2
     } else if (option === 12) {
         dynamicDiv.style.display = 'flex'
+        starttxt.style.display = 'none'
         starttxt.innerText = "在本次任务中，您将与我进行一场资源分配任务。在此次任务中，您将作为提议者，负责提出资源分配的方案。我将作为响应者，对您的提议作出接受或拒绝的决策。"
         dynam.style.display = "flex"
         autoselect.style.display = 'none'
@@ -766,7 +860,8 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
     } else if (option === 13) {
         dynamicDiv.style.display = 'flex'
         dynam.style.display = "flex"
-        starttxt.innerText = "在本次任务中，您将与我进行一场最后通牒博弈。在博弈中，我将作为提议者，负责提出资源分配的方案。您将作为响应者，对我的提议作出接受或拒绝的决策。"
+        starttxt.style.display = 'none'
+        // starttxt.innerText = "在本次任务中，您将与我进行一场资源分配任务。在此次任务中，我将作为提议者，负责提出资源分配的方案。您将作为响应者，对我的提议作出接受或拒绝的决策。"
         autoselect.style.display = 'none'
         taskDecision.style.display = 'none'
         table.style.display = 'none'
@@ -804,7 +899,8 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
     } else if (option === 15) {
         dynamicDiv.style.display = 'flex'
         dynam.style.display = "flex"
-        starttxt.innerText = "在本次任务中，您将与我协作与其他团队进行一场博弈。您将扮演接受者的角色，我会给您提供建议，您可以基于我的建议做出决策。"
+        starttxt.style.display = 'none'
+        // starttxt.innerText = "在本次任务中，您将与我协作与其他团队进行一场博弈。您将扮演接受者的角色，我会给您提供建议，您可以基于我的建议做出决策。"
         autoselect.style.display = 'none'
         taskDecision.style.display = 'none'
         table.style.display = 'none'
@@ -828,9 +924,10 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         table.style.display = 'flex'
         tableadd.style.display = 'none'
         tablehead.style.display = 'none'
+        tableimg.style.display = 'flex'
+        tableimg.src = 'img/result.png'
         tablep.style.display = 'flex'
-        tablep.innerText = "您的总收益为：" + getRandomNumber(160, 200) + " ¥\n\n" + "您的排名为： 26/32 "
-        tableimg.style.display = 'none'
+        tablep.innerText = "\n\n" + "您当前的排名处于前 68.5 百分位 "//"您的总收益为：" + getRandomNumber(160, 200) + 
     } else if (option === 17) {
         dynamicDiv.style.display = 'none'
         autoselect.style.display = 'none'
@@ -867,7 +964,7 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
 
 }
 
-function write(exp_id, index, self_val, computer_val, reaction_time, time, option, other_option) {
+function write(exp_id, index, self_val, computer_val, reaction_time, time, option, other_option, inputValue, qinmidu) {
     fetch('http://127.0.0.1:8000/set_exp/', {
         method: 'POST',
         headers: {
@@ -882,6 +979,8 @@ function write(exp_id, index, self_val, computer_val, reaction_time, time, optio
             time: time,
             option: option,
             other_option: other_option,
+            inputValue : inputValue,
+            qinmidu :qinmidu,
         })
     }).then(response => response)
         .catch(error => {
@@ -906,8 +1005,8 @@ async function select1(decisions) {
     taskDecision.style.display = 'block';
     bt1 = document.getElementById('bt1');
     bt2 = document.getElementById('bt2');
-    bt1.innerHTML = '自己：' + decisions.option1.self + '</br>电脑：' + decisions.option1.computer;
-    bt2.innerHTML = '自己：' + decisions.option2.self + '</br>电脑：' + decisions.option2.computer;
+    bt1.innerHTML = '自己：' + decisions.option1.self + '</br>响应者：' + decisions.option1.computer;
+    bt2.innerHTML = '自己：' + decisions.option2.self + '</br>响应者：' + decisions.option2.computer;
     const startTime = Date.now(); // 记录开始时间
     return new Promise(resolve => {
         // 为按钮添加点击事件
@@ -1052,7 +1151,7 @@ async function select3(decisions) {
     taskDecision.style.display = 'block';
     // taskDecision.inn
     extraimg.style.display = 'block'
-    extraimg.src = 'img/nao.jpg'
+    extraimg.src = 'img/nao.jpg'//'img/nao.jpgimg/Blue-NAO.png' 
     extraimg.style.height = 'auto';
     extraimg.style.width = '250px';
     extrap.innerHTML = "“" + "我得" + decisions.option1.computer + " ¥，你得" + decisions.option1.self + " ¥" + "”"
@@ -1236,7 +1335,7 @@ function init() {
     // all.style.display = 'none'
     timeoutIds.forEach(clearTimeout);
     timeoutIds = [];
-    dynam.innerText = "点击开始实验"
+    dynam.innerText = "开始吧"
     dynamicDiv.style.display = 'block'
     autoselect.style.display = 'none'
     taskDecision.style.display = 'none'
@@ -1332,24 +1431,18 @@ function generateRandomPermutation(num) {
 
     return nums; // 返回随机全排列
 }
-// function setData() {
-//     const requestType = document.getElementById('requestType').value;
-//     const requestMessage = document.getElementById('requestMessage').value;
-//     fetch('http://127.0.0.1:8000/setdata', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             type: parseInt(requestType),
-//             message: requestMessage
-//         })
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             alert(data.message); // 提示用户数据已保存
-//         })
-//         .catch(error => {
-//             console.error('set data error :', error);
-//         });
-// }
+window.onload = function() {
+    // 监听 dynam 按钮的点击事件
+    document.getElementById('dynam').addEventListener('click', function() {
+        // 获取第一个输入框的值
+        inputValue = document.getElementById('input1').value;
+        console.log('Input 1 Value:', inputValue);
+    });
+
+    // 监听 anotherStartDiv 按钮的点击事件
+    document.getElementById('anotherStartDiv').addEventListener('click', function() {
+        // 获取第二个输入框的值
+        qinmiduValue = document.getElementById('input2').value;
+        console.log('Input 2 Value:', qinmiduValue);
+    });
+};

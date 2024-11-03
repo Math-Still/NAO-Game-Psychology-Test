@@ -234,7 +234,7 @@ html {
     border: none;
     border-radius: 5px;
     /* 圆角边框 */
-    font-size: 20px;
+    font-size: 25px;
     /* 增加字体大小 */
     cursor: pointer;
     font-family: Arial, sans-serif;
@@ -257,20 +257,21 @@ html {
 
 .expbut {
     background-color: black;
-    /* 黑色背景 */
     color: white;
-    /* 白色字体 */
-    padding: 35px 50px;
-    /* 增加按钮尺寸 */
+    padding: 30px 30px; /* 进一步减少内边距，按钮高度和宽度减小 */
     border: none;
     border-radius: 5px;
-    /* 圆角边框 */
-    font-size: 15px;
-    /* 增加字体大小 */
-    /* cursor: pointer; */
+    font-size: 25px; /* 减少字体大小，按钮整体变小 */
     font-family: Arial, sans-serif;
+    width: calc(12% - 20px); /* 减少宽度比例，使按钮变得更短 */
+    margin: 20px; /* 保持按钮之间的间距 */
+    display: inline-block;
+    box-sizing: border-box;
 
+}
 
+.expbut:hover {
+    background-color: darkgray; 
 }
 
 .exp1bt {
@@ -348,6 +349,26 @@ body {
     transition: background-color 0.3s ease;
     /* 平滑过渡效果 */
 }
+.osel {
+    display: inline-block;
+    /* 使元素在同一行显示 */
+    padding: 10px;
+    /* 内边距 */
+    margin: 5px;
+    /* 外边距 */
+    border: 2px solid #000;
+    /* 边框 */
+    font-size: 24px;
+    /* 字体大小 */
+    font-weight: bold;
+    /* 字体加粗 */
+    cursor: pointer;
+    /* 鼠标悬停时显示手形光标 */
+    background-color: #ffffff;
+    /* 背景颜色 */
+    transition: background-color 0.3s ease;
+    /* 平滑过渡效果 */
+}
 
 /* @media screen and (min-width: 0) {
     :fullscreen .sel,
@@ -383,4 +404,41 @@ body {
     border: 1px solid #ccc;
     padding: 10px;
     margin-top: 20px;
+}
+#input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+#welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 使内容在水平方向居中 */
+    justify-content: center; /* 使内容在垂直方向居中 */
+    display: none; /* 保持隐藏状态 */
+}
+
+#welcome img {
+    width: 950px;
+    height: 500px;
+}
+
+#startDiv {
+    margin-top: 500px; /* 可以根据需要调整间距 */
+}
+#imageContainer {
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-align: center;
 }

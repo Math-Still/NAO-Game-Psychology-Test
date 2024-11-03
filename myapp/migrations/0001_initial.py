@@ -23,6 +23,8 @@ class Migration(migrations.Migration):
                 ('time', models.TextField(null=True)),
                 ('option', models.TextField()),
                 ('other_option', models.TextField()),
+                ('inputValue', models.TextField()),
+                ('qinmidu', models.TextField()),
             ],
         ),
         migrations.CreateModel(

@@ -8,12 +8,13 @@ import os
 import pandas as pd
 import time
 
-# import qi
 myip = "127.0.0.1"
 
 @csrf_exempt
 def save(request):
     exp_data = ExpResult.objects.filter(exp_id__in=[0,1,2,3,4,5])  # 替换为实际的 exp_id
+    
+    # 初始化数据字典
     data = {
         'exp_id': [],
         'index': [],
@@ -22,8 +23,12 @@ def save(request):
         'reaction_time': [],
         'time': [],
         'option': [],
-        'other_option': []
+        'other_option': [],
+        'inputValue': [],
+        'qinmidu': [],
     }
+    
+    # 遍历实验结果数据并填充字典
     for result in exp_data:
         data['exp_id'].append(result.exp_id)
         data['index'].append(result.index)
@@ -33,15 +38,31 @@ def save(request):
         data['time'].append(result.time)
         data['option'].append(result.option)
         data['other_option'].append(result.other_option)
+        data['inputValue'].append(result.inputValue)
+        data['qinmidu'].append(result.qinmidu)
+    
+    # 将数据转换为 Pandas DataFrame
     df = pd.DataFrame(data)
-
-    # 导出到 CSV 文件
-    timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) 
-    csv_file_path = f'experiment_results_{timestamp}.csv'
-    df.to_csv(csv_file_path, index=False)
-    print(f"CSV 文件已成功生成：{csv_file_path}")
-    return JsonResponse({'status': 'success', 'message': f'Data has been saved'})
-
+    
+    # 根据 inputValue 分组
+    grouped = df.groupby('inputValue')
+    
+    # 遍历每个分组并生成两个文件
+    for input_value, group in grouped:
+        # 生成文件名
+        data_file_name = f'{input_value}_data.csv'
+        closeness_file_name = f'{input_value}_closeness.csv'
+        
+        # 导出 data 文件
+        group.drop(columns=['qinmidu']).to_csv(data_file_name, index=False)
+        print(f"CSV 文件已成功生成：{data_file_name}")
+        
+        # 导出 closeness 文件，只包含 inputValue 和 qinmidu 两列
+        closeness_data = group[['inputValue', 'qinmidu']]
+        closeness_data.to_csv(closeness_file_name, index=False)
+        print(f"CSV 文件已成功生成：{closeness_file_name}")
+    
+    return JsonResponse({'status': 'success', 'message': 'Data has been saved'})
 def get_image(request, image_name):
     # 构建图片的完整路径
     image_path = os.path.join(settings.BASE_DIR, 'static', 'img', image_name)
