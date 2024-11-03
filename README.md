@@ -1,4 +1,3 @@
-# NAO-Game-Psychology-Test
 
 ## 如何使用？
 
