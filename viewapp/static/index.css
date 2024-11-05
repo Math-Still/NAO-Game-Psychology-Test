@@ -1,0 +1,449 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    /* 使用 Flexbox */
+    width: 100%;
+    /* 设置高度为视口高度 */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    /* 垂直居中 */
+    justify-content: center;
+    /* 水平居中 */
+    background-color: #ffffff;
+
+}
+
+#extraimg {
+
+    width: 100%;
+    /* 自适应父容器 */
+    height: auto;
+    /* 保持纵横比 */
+    max-width: 300px;
+    /* 设置最大宽度 */
+    /* justify-content: center;
+    /* 居中按钮 */
+    /* align-items: center; */
+
+    margin: 0 auto;
+
+
+}
+
+#extrap {
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#tablehead {
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#tablelap {
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#tableimg {
+    width: 100%;
+    /* 自适应父容器 */
+    height: auto;
+    /* 保持纵横比 */
+    max-width: 500px;
+    /* 设置最大宽度 */
+    /* transition: opacity 0.5s ease-in-out; */
+}
+
+#starttxt {
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.showtable {
+    display: flex;
+    /* 使容器成为 Flexbox */
+    flex-direction: column;
+    /* 垂直排列子元素 */
+    justify-content: center;
+    /* 垂直居中 */
+    align-items: center;
+    /* 水平居中 */
+    font-size: 50px;
+    /* 字体大小 */
+    height: 100vh;
+    /* 设置容器高度为视口高度 */
+}
+
+.center-plus {
+    font-size: 150px;
+    /* 加号的大小 */
+    color: rgb(0, 0, 0);
+    /* 加号的颜色 */
+    position: absolute;
+    /* 绝对定位 */
+    top: 50%;
+    /* 垂直居中 */
+    left: 50%;
+    /* 水平居中 */
+    transform: translate(-50%, -50%);
+    /* 调整位置，使其真正在中心 */
+    font-family: Arial, sans-serif;
+    /* 使用更细的字体 */
+
+}
+
+.dynamicDiv {
+    /* width: 80vw; */
+    /* height: 80vh; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    transition: background-color 1s, color 1s;
+    cursor: pointer;
+
+    /* width: 100%;  */
+    /* height: 100%;  */
+}
+
+.pfont {
+    font-size: 50px;
+    /* 字体大小 */
+    text-align: center;
+    /* 文本居中 */
+    font-family: 'Times New Roman', Times, serif;
+    /* 使用 Times New Roman 字体 */
+
+}
+
+.dynam-text {
+    font-size: 60px;
+    /* width: 100%; */
+    /* 占满宽度 */
+    /* height: 100%; */
+    /* 占满高度 */
+    justify-content: center;
+    /* 居中按钮 */
+    align-items: center;
+    position: absolute;
+    /* 绝对定位 */
+    top: 10%;
+    /* 垂直居中 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 垂直居中 */
+}
+
+.hidden {
+    display: none;
+}
+
+.button-bordered {
+    position: relative;
+    /* 使伪元素相对于按钮定位 */
+    padding: 5px 10px;
+    /* 按钮的内边距 */
+    background-color: white;
+    /* 按钮背景颜色 */
+    border: none;
+    /* 去掉默认边框 */
+    cursor: pointer;
+    /* 鼠标悬停时显示手形光标 */
+}
+
+.button-bordered::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    /* 边框距离按钮顶部 */
+    left: -15px;
+    /* 边框距离按钮左侧 */
+    right: -15px;
+    /* 边框距离按钮右侧 */
+    bottom: -15px;
+    /* 边框距离按钮底部 */
+    border: 2px solid rgba(30, 0, 255, 0.684);
+    /* 边框颜色 */
+    border-radius: 4px;
+    /* 可选：圆角 */
+    pointer-events: none;
+    /* 使边框不阻止点击 */
+}
+
+.st-txt {
+    font-size: 35px;
+    /* width: 100%; */
+    /* 占满宽度 */
+    /* height: 100%; */
+    /* 占满高度 */
+    justify-content: center;
+    /* 居中按钮 */
+    align-items: center;
+    position: absolute;
+    /* 绝对定位 */
+    top: 35%;
+    /* 垂直居中 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 垂直居中 */
+}
+
+.startbt {
+    background-color: #000000;
+    color: white;
+    /* 白色字体 */
+    padding: 45px 35px;
+    /* 增加按钮尺寸 */
+    border: none;
+    border-radius: 5px;
+    /* 圆角边框 */
+    font-size: 20px;
+    /* 增加字体大小 */
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    position: absolute;
+    /* 绝对定位 */
+    top: 65%;
+    /* 垂直居中 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.startbt:hover {
+    background-color: darkgray;
+    /* 悬停效果 */
+}
+
+.cbut {
+    background-color: black;
+    /* 黑色背景 */
+    color: white;
+    /* 白色字体 */
+    padding: 65px 75px;
+    /* 增加按钮尺寸 */
+    border: none;
+    border-radius: 5px;
+    /* 圆角边框 */
+    font-size: 25px;
+    /* 增加字体大小 */
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+
+}
+
+.button-container {
+    width: 100%;
+    /* 容器宽度占满屏幕 */
+    /* height: 100%; */
+    /* 容器高度占满屏幕 */
+    display: flex;
+    justify-content: center;
+    /* 居中按钮 */
+    gap: 70px;
+    /* 按钮间距 */
+    margin-top: 200px;
+    /* 增加上边距 */
+}
+
+.expbut {
+    background-color: black;
+    color: white;
+    padding: 30px 30px; /* 进一步减少内边距，按钮高度和宽度减小 */
+    border: none;
+    border-radius: 5px;
+    font-size: 25px; /* 减少字体大小，按钮整体变小 */
+    font-family: Arial, sans-serif;
+    width: calc(12% - 20px); /* 减少宽度比例，使按钮变得更短 */
+    margin: 20px; /* 保持按钮之间的间距 */
+    display: inline-block;
+    box-sizing: border-box;
+
+}
+
+.expbut:hover {
+    background-color: darkgray; 
+}
+
+.exp1bt {
+    /* width: 80vw; */
+    /* 容器宽度占满屏幕 */
+    display: flex;
+    /* flex-direction: column; */
+    /* 纵向排列 */
+    
+    justify-content: center;
+    /* 居中按钮 */
+    gap: 50px;
+    /* 按钮间距 */
+    margin-top: 150px;
+    flex-wrap: wrap
+}
+
+.cbut:hover {
+    background-color: darkgray;
+    /* 悬停效果 */
+}
+
+.choice-text {
+    text-align: center;
+    font-size: 80px;
+    /* 可以根据需要调整字体大小 */
+    margin-bottom: 50px;
+
+}
+
+.choice {
+    display: flex;
+    /* 使用 flexbox */
+    flex-direction: column;
+    /* 垂直排列内容 */
+    justify-content: center;
+    /* 垂直居中内容 */
+    align-items: center;
+    /* 水平居中内容 */
+    text-align: center;
+    font-size: 32px;
+    padding: 36px;
+    border-radius: 10px;
+    background-color: white;
+    width: 100%;
+    /* 占满宽度 */
+    height: 65%;
+    /* 占满高度 */
+    max-width: 600px;
+    /* 最大宽度 */
+
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.sel {
+    display: inline-block;
+    /* 使元素在同一行显示 */
+    padding: 10px;
+    /* 内边距 */
+    margin: 5px;
+    /* 外边距 */
+    border: 2px solid #000;
+    /* 边框 */
+    font-size: 24px;
+    /* 字体大小 */
+    font-weight: bold;
+    /* 字体加粗 */
+    cursor: pointer;
+    /* 鼠标悬停时显示手形光标 */
+    background-color: #ffffff;
+    /* 背景颜色 */
+    transition: background-color 0.3s ease;
+    /* 平滑过渡效果 */
+}
+.osel {
+    display: inline-block;
+    /* 使元素在同一行显示 */
+    padding: 10px;
+    /* 内边距 */
+    margin: 5px;
+    /* 外边距 */
+    border: 2px solid #000;
+    /* 边框 */
+    font-size: 24px;
+    /* 字体大小 */
+    font-weight: bold;
+    /* 字体加粗 */
+    cursor: pointer;
+    /* 鼠标悬停时显示手形光标 */
+    background-color: #ffffff;
+    /* 背景颜色 */
+    transition: background-color 0.3s ease;
+    /* 平滑过渡效果 */
+}
+
+/* @media screen and (min-width: 0) {
+    :fullscreen .sel,
+    :webkit-full-screen .sel,
+    :moz-full-screen .sel,
+    :ms-fullscreen .sel {
+        display: inline-block;
+        padding: 10px;
+        margin: 5px;
+        border: 2px solid #000;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #f9f9f9;
+    }
+} */
+/* 鼠标悬停时改变背景颜色 */
+.sel:hover {
+    background-color: #ddd;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* 确保没有其他规则影响 */
+#autoselect .sel {
+    display: inline-block;
+    float: none; /* 如果有 float 规则，确保清除 */
+    position: static; /* 如果有 position 规则，确保清除 */
+}
+.radio-group {
+    margin-bottom: 10px;
+}
+
+.selected-experiment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+}
+#input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+#welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 使内容在水平方向居中 */
+    justify-content: center; /* 使内容在垂直方向居中 */
+    display: none; /* 保持隐藏状态 */
+}
+
+#welcome img {
+    width: 950px;
+    height: 500px;
+}
+
+#startDiv {
+    margin-top: 500px; /* 可以根据需要调整间距 */
+}
+#imageContainer {
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-align: center;
+}

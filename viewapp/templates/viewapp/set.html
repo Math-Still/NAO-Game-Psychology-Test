@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理端</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+
+<body>
+    <button onclick="fetchData(1)">查看当前状态</button>
+    <div class="selected-experiment" id="selectedExperiment">
+        <p>已选择的实验：</p>
+        <span id="selectedValue">无</span>
+    </div>
+    <h2>修改实验</h2>
+    <div class="dropdown-container">
+        <select id="experimentSelect" onchange="updateSelection()">
+            <option value="0">请选择</option>
+            <option value="1">实验1</option>
+            <option value="2">实验2</option>
+            <option value="3">实验3</option>
+            <option value="4">实验4</option>
+            <option value="5">实验5</option>
+            <option value="6">自主设置</option>
+
+        </select>
+    </div>
+    <button onclick="setData()">修改实验</button>
+
+    <script src="{% static 'set.js' %}" defer></script>
+</body>
+
+</html>

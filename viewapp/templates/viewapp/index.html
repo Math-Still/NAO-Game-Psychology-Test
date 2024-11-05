@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+
+</head>
+
+<body>
+    <div class="showtable" id="table" style="display: none;">
+        <h1 class="dynam-text" id="tablehead">响应者-电脑</h1>
+        <img id="tableimg" src="{% static 'img/center.jpg' %}"></img>
+        <div class="pfont" id="tablep">电脑正在进行决策</div>
+        <svg class="center-plus" id="tableadd" width="200" height="200" viewBox="0 0 200 200" style="display: none;">
+            <line x1="100" y1="60" x2="100" y2="140" stroke="black" stroke-width="12" />
+            <line x1="60" y1="100" x2="140" y2="100" stroke="black" stroke-width="12" />
+        </svg>
+
+    </div>
+    <div id="dynamicDiv" style="display: block;">
+        <h1 id="starttxt" class="st-txt">请输入您的实验编号:</h1>
+        <div id="imageContainer"></div>
+        <input id="input1" style="width: 200px; padding: 10px; border: 2px solid #0e1617; border-radius: 5px; font-size: 16px;">
+        <button id="dynam" class="startbt">点击开始实验</button>
+    </div>
+
+    <div id="autoselect" style="display: none;">
+        <div class="sel" id="sel1_1">练习任务</div>
+        <div class="sel" id="sel1_2">正式任务</div>
+    </div>
+    <div id="select1" style="display: none;">
+        <div class="sel" id="sel2">练习1</div>
+        <div class="sel" id="sel3">练习2</div>
+        <div class="sel" id="sel10" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">返回</div>
+    </div>
+    <div id="welcome" style="display: none;">
+        <img src="http://127.0.0.1:8000/img/3.png/">
+        <div id="startDiv" class="sel">开始</div>
+    </div>
+    <div id="QinMiDu" style="display: none; text-align: center; padding: 20px;">
+        <img src="http://127.0.0.1:8000/img/7.png/" style="width: 800px; height: auto;">
+        <input id="input2" style="width: 200px; padding: 10px; border: 2px solid #0e1617; border-radius: 5px; font-size: 16px; display: block; margin: 0 auto;">
+        <img src="http://127.0.0.1:8000/img/closeness.png/" style="width: 1000px; height: auto;">
+        <br>
+        <div id="anotherStartDiv" class="sel" style="display: inline-block; margin: 0 auto; width: 100px;">开始</div>
+    </div>
+    <div id="select2" style="display: none;">
+        <div class="sel" id="sel8">实验1</div>
+        <div class="sel" id="sel7">实验2</div>
+        <div class="sel" id="sel4">实验3</div>
+        <div class="sel" id="sel5">实验4</div>
+        <div class="sel" id="sel6" style="display: none;">最终分数</div>
+    </div>
+    <div class="exp1bt" id="bt-con" style="display:none;">
+       
+    </div>
+    <div id="taskDecision" class="choice" style="display: none">
+        <img id="extraimg" src="{% static 'img/nao.jpg' %}" style="display: none;"></img>
+        <div id="extrap" class="choice-text">请做出选择</div>
+        <div class="button-container" id="tes">
+            <button onclick="" id="bt1" class="cbut">1</button>
+            <button onclick="" id="bt2" class="cbut">2</button>
+        </div>
+    </div>
+    <script src="{% static 'index.js' %}" defer></script>
+</body>
+
+</html>

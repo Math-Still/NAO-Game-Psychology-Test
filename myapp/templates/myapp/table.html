@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpResult Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>ExpResult Data</h2>
+<table>
+    <thead>
+        <tr>
+            <th>实验序号</th>
+            <th>实验轮数</th>
+            <th>用户获得</th>
+            <th>对手获得</th>
+            <th>反应时间(ms)</th>
+            <th>实验时间</th>
+            <th>另一个选项</th>
+            <th>选择的选项（0为选项1或者接受，1为选项2或者拒绝）</th>
+            
+            <!-- 添加其他字段标题 -->
+        </tr>
+    </thead>
+    <tbody>
+        {% if data %}
+            {% for row in data %}
+                <tr>
+                    <td>{{ row.exp_id }}</td>
+                    <td>{{ row.index }}</td>
+                    <td>{{ row.self_val }}</td>
+                    <td>{{ row.computer_val }}</td>
+                    <td>{{ row.reaction_time }}</td>
+                    <td>{{ row.time }}</td>
+                    <td>{{ row.other_option }}</td>
+                    <td>{{ row.option }}</td>
+                    <!-- 添加其他字段 -->
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
+
+</body>
+</html>
