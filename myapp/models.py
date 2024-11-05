@@ -17,8 +17,14 @@ class ExpResult(models.Model):
     time = models.TextField(null=True)
     option = models.TextField() 
     other_option = models.TextField() 
+<<<<<<< HEAD
     inputValue = models.IntegerField()
     qinmidu = models.IntegerField(null=True, blank=True)
 
+=======
+    inputValue = models.TextField()
+    qinmidu = models.TextField()
+    # time = models.DateTimeField(null=True) 
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     def __str__(self):
         return f"实验{self.exp_id} 实验次数:{self.index} 玩家:{self.self_val} 电脑:{self.computer_val} 反应时间:{self.reaction_time} "

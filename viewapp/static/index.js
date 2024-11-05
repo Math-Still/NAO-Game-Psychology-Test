@@ -18,7 +18,10 @@ const container = document.getElementById('bt-con');
 const testflag = 1;
 const welcome = document.getElementById('welcome')
 const qinmidu = document.getElementById('QinMiDu')
+<<<<<<< HEAD
 const input11 = document.getElementById('input1')
+=======
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
 var self_val = 0;
 var computer_val = 0;
 var reactionTime = 0;
@@ -41,6 +44,7 @@ const sel5 = document.getElementById('sel5')
 const sel6 = document.getElementById('sel6')
 const sel7 = document.getElementById('sel7')
 const sel8 = document.getElementById('sel8')
+<<<<<<< HEAD
 const sel10 = document.getElementById('sel8')
 var completedTasks = 0
 var exer1 = 0
@@ -49,6 +53,10 @@ var expStatus1 = 0
 var expStatus2 = 0
 var expStatus3 = 0
 var expStatus4 = 0
+=======
+var completedTasks = 0
+
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
 function say(say_text) {
     fetch('http://127.0.0.1:8000/qisay/', {
         method: 'POST',
@@ -158,9 +166,13 @@ document.addEventListener('DOMContentLoaded', function () {
             sel1_1.style.display = 'none';
             sel1_2.style.display = 'none';
             select11.style.display = 'block';
+<<<<<<< HEAD
             sel10.style.display = 'none';
         } else if (target.innerText === '正式任务') {
 
+=======
+        } else if (target.innerText === '正式任务') {
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
             console.log("Clicked: 正式任务");
             // 显示欢迎页面
             document.getElementById('welcome').style.display = 'block';
@@ -178,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.getElementById('anotherStartDiv').addEventListener('click', function () {
+<<<<<<< HEAD
 
         qinmidu.style.display = 'none';
         select22.style.display = 'inline-block';
@@ -186,6 +199,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // sel6.style.display = 'none';
         sel7.style.display = 'inline-block';
         sel8.style.display = 'inline-block';
+=======
+        // 隐藏另一个界面并显示实验选择界面
+        qinmidu.style.display = 'none';
+        select22.style.display = 'block';
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     });
 
     document.querySelectorAll('.sel').forEach(element => {
@@ -193,12 +211,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // 为 select1 中的按钮添加点击事件
+<<<<<<< HEAD
     select11.addEventListener('click', handleExer);
+=======
+    select11.addEventListener('click', function () {
+        select11.style.display = 'none';
+        exp1();
+    });
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
 
     // 为 select2 中的按钮添加点击事件
     document.querySelectorAll('.sel').forEach(element => {
         element.addEventListener('click', handleOselClick);
     });
+<<<<<<< HEAD
     function handleExer(event) {
         const target = event.target;
 
@@ -286,10 +312,52 @@ document.addEventListener('DOMContentLoaded', function () {
             else {
                 target.style.pointerEvents = 'none';
             }
+=======
+
+    function handleOselClick(event) {
+        const target = event.target;
+        if (target.innerText === '实验1') {
+            select22.style.display = 'none';
+            hideButtons();
+            // completedTasks += 1;
+            console.log(completedTasks)
+            exp2();
+            completedTasks += 1;
+        } else if (target.innerText === '实验2') {
+            select22.style.display = 'none';
+            hideButtons();
+            // completedTasks += 1;
+            console.log(completedTasks)
+            exp3();
+            completedTasks += 1;
+        } else if (target.innerText === '实验3') {
+            select22.style.display = 'none';
+            hideButtons();
+            // completedTasks += 1;
+            console.log(completedTasks)
+            exp4();
+            completedTasks += 1;
+        } else if (target.innerText === '实验4') {
+            select22.style.display = 'none';
+            hideButtons();
+            // completedTasks += 1;
+            console.log(completedTasks)
+            exp5();
+            completedTasks += 1;
+            select22.style.display = 'block';
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         } else if (target.innerText === '最终分数') {
             exp6();
             document.getElementById('sel6').style.display = 'none';
         }
+<<<<<<< HEAD
+=======
+
+        if (completedTasks === 4) {
+            hideAllSelButtons();
+            document.getElementById('sel6').style.display = 'flex';
+        }
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     }
 
     function hideButtons() {
@@ -319,6 +387,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+<<<<<<< HEAD
 document.getElementById('sel10').addEventListener('click', function () {
     select11.style.display = 'none';
     autoselect.style.display = 'inline-block';
@@ -326,6 +395,9 @@ document.getElementById('sel10').addEventListener('click', function () {
     sel1_2.style.display = 'inline-block';
     dynamicDiv.style.display = 'none';
 });
+=======
+
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
 async function exp1tes() {
     const decisions = [
         { option1: { self: 10, computer: 0 }, option2: { self: 9, computer: 1 } },
@@ -352,8 +424,12 @@ async function exp1tes() {
         await select1(decisions[seq[i]], self_val, computer_val, option)
         await respond(3)
         var time = get_time()
+<<<<<<< HEAD
         write(1, i, self_val, computer_val, reactionTime, time, other_option, inputValue, qinmiduValue)
         console(qinmidu)
+=======
+        write(1, i, self_val, computer_val, reactionTime, time, other_option,inputValue,qinmidu)
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -364,7 +440,10 @@ async function exp1tes() {
 }
 
 async function exp1_1() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     const decisions = [
         { option1: { self: 10, computer: 0 } },
         { option1: { self: 9, computer: 1 } },
@@ -437,7 +516,11 @@ async function exp1_1() {
             var time = get_time()
             const endTime = Date.now();
             reactionTime = endTime - startTime
+<<<<<<< HEAD
             write(0, i, decisions[buttonNumber].option1.self, decisions[buttonNumber].option1.computer, reactionTime, time, option, other_option, inputValue, qinmiduValue)
+=======
+            write(0, i, decisions[buttonNumber].option1.self, decisions[buttonNumber].option1.computer, reactionTime, time, option, other_option,inputValue,qinmidu)
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         });
         container.style.display = 'none'
         while (container.firstChild) {
@@ -450,10 +533,15 @@ async function exp1_1() {
         await setdelay(2500)
         // header.remove(); // 删除文本
     }
+<<<<<<< HEAD
     if (exer1 == 1 && exer2 == 1) {
         select11.style.display = 'block';
     }
     await start()
+=======
+    await start()
+
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
 }
 // async function exercise() {
 
@@ -479,13 +567,18 @@ async function exp1() {
         await select1(decisions[seq[i]], self_val, computer_val)
         await respond(18)
         var time = get_time()
+<<<<<<< HEAD
         write(0, i, self_val, computer_val, reactionTime, time, option, other_option, inputValue, qinmiduValue)
+=======
+        write(1, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
     }
     respond(4)
     await setdelay(2000)
+<<<<<<< HEAD
     select11.style.display = 'block';
     if (exer1 == 1 && exer2 == 1) {
         sel9.stle.display = 'block';
@@ -495,6 +588,12 @@ async function exp1() {
 }
 async function exp1_2() {
 
+=======
+    welcome.style.display = 'block';
+    await start()
+}
+async function exp1_2() {
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     const decisions = [
         { option1: { self: 9, computer: 1 } },
         { option1: { self: 7, computer: 3 } },
@@ -518,12 +617,19 @@ async function exp1_2() {
         await select1_2(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
+<<<<<<< HEAD
         write(1, i, self_val, computer_val, reactionTime, time, option, other_option, inputValue, qinmiduValue)
         // await setdelay(getRandomNumber(3000,5000))
     }
     if (exer1 == 1 && exer2 == 1) {
         select11.style.display = 'block';
     }
+=======
+        write(1, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
+        // await setdelay(getRandomNumber(3000,5000))
+    }
+    welcome.style.display = 'block';
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     await start()
 
 }
@@ -564,7 +670,11 @@ async function exp2() {
         await respond(6);
         var time = get_time();
         // time=str(t)
+<<<<<<< HEAD
         write(2, i, self_val, computer_val, reactionTime, time, option, other_option, inputValue, qinmiduValue);
+=======
+        write(2, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu );
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         await setdelay(getRandomNumber(3000, 5000));
 
         // 添加显示图片的逻辑
@@ -572,6 +682,7 @@ async function exp2() {
 
     }
     say("感谢您的决策，稍后我们将告知您本轮您的收益。");
+<<<<<<< HEAD
     select22.style.display = 'inline-block';
     sel4.style.display = 'inline-block';
     sel5.style.display = 'inline-block';
@@ -587,6 +698,14 @@ async function exp2() {
         sel7.style.display = 'none';
         sel8.style.display = 'none';
     }
+=======
+    select22.style.display = 'block';
+    sel4.style.display = 'block';
+    sel5.style.display = 'block';
+    // sel6.style.display = 'none';
+    sel7.style.display = 'block';
+    sel8.style.display = 'block';
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     await start();
 }
 
@@ -624,7 +743,11 @@ async function exp3() {
         await select3(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
+<<<<<<< HEAD
         write(3, i, self_val, computer_val, reactionTime, time, option, other_option, inputValue, qinmiduValue)
+=======
+        write(3, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         // await setdelay(getRandomNumber(3000,5000))
     }
 
@@ -632,6 +755,7 @@ async function exp3() {
     // respond(4)
     // await setdelay(1000)
     say("感谢您的决策，稍后我们将告知您本轮您的收益。")
+<<<<<<< HEAD
     select22.style.display = 'inline-block';
     sel4.style.display = 'inline-block';
     sel5.style.display = 'inline-block';
@@ -647,6 +771,14 @@ async function exp3() {
         sel7.style.display = 'none';
         sel8.style.display = 'none';
     }
+=======
+    select22.style.display = 'block';
+    sel4.style.display = 'block';
+    sel5.style.display = 'block';
+    // sel6.style.display = 'none';
+    sel7.style.display = 'block';
+    sel8.style.display = 'block';
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     await start()
 
 }
@@ -691,7 +823,11 @@ async function exp4() {
         await select4(decisions[seq[i]], self_val, computer_val)
         await respond(10)
         var time = get_time()
+<<<<<<< HEAD
         write(4, i, self_val, computer_val, reactionTime, time, option, other_option, inputValue, qinmiduValue)
+=======
+        write(4, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         await setdelay(getRandomNumber(3000, 5000))
         // await respond(1)
         // await setdelay(1000)
@@ -699,6 +835,7 @@ async function exp4() {
     // respond(4)
     // await setdelay(2000)
     say("感谢您的决策，稍后我们将告知您本轮您的收益。")
+<<<<<<< HEAD
     select22.style.display = 'inline-block';
     sel4.style.display = 'inline-block';
     sel5.style.display = 'inline-block';
@@ -714,6 +851,14 @@ async function exp4() {
         sel7.style.display = 'none';
         sel8.style.display = 'none';
     }
+=======
+    select22.style.display = 'block';
+    sel4.style.display = 'block';
+    sel5.style.display = 'block';
+    // sel6.style.display = 'none';
+    sel7.style.display = 'block';
+    sel8.style.display = 'block';
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     await start()
 }
 async function exp5() {
@@ -756,13 +901,18 @@ async function exp5() {
         await select5(decisions[seq[i]], self_val, computer_val)
         var time = get_time()
         // time=str(t)
+<<<<<<< HEAD
         write(5, i, self_val, computer_val, reactionTime, time, option, other_option, inputValue, qinmiduValue)
+=======
+        write(5, i, self_val, computer_val, reactionTime, time, option, other_option,inputValue,qinmidu)
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         // await setdelay(2000)
     }
     // await setdelay(1000)
     // respond(4)
     // await setdelay(3000)
     say("感谢您的决策，稍后我们将告知您本轮您的收益")
+<<<<<<< HEAD
     select22.style.display = 'inline-block';
     sel4.style.display = 'inline-block';
     sel5.style.display = 'inline-block';
@@ -778,6 +928,14 @@ async function exp5() {
         sel7.style.display = 'none';
         sel8.style.display = 'none';
     }
+=======
+    select22.style.display = 'block';
+    sel4.style.display = 'block';
+    sel5.style.display = 'block';
+    // sel6.style.display = 'none';
+    sel7.style.display = 'block';
+    sel8.style.display = 'block';
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     await start()
 
 }
@@ -846,9 +1004,14 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         tablehead.style.display = 'none'
         tablep.style.display = 'none'
         tableimg.style.display = 'none'
+<<<<<<< HEAD
         input11.style.display = 'none';
         starttxt.innerText = "您的总收益为：" + self_all + " ¥";
         starttxt.style.display = 'block'
+=======
+        starttxt.innerText = "您的总收益为：" + self_all + " ¥";
+        starttxt.style.display = 'flex'
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         dynam.style.display = 'none'
         // } else if (option === 5) {
         //     dynamicDiv.style.display = 'none'
@@ -1042,7 +1205,11 @@ async function respond(option) {//1 白色 2 响应者电脑 3 电脑正在进�
         tableimg.style.display = 'flex'
         tableimg.src = 'img/result.png'
         tablep.style.display = 'flex'
+<<<<<<< HEAD
         tablep.innerText = "您当前的排名处于前 68.5 百分位 "//"您的总收益为：" + getRandomNumber(160, 200) + 
+=======
+        tablep.innerText = "\n\n" + "您当前的排名处于前 68.5 百分位 "//"您的总收益为：" + getRandomNumber(160, 200) + 
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     } else if (option === 17) {
         dynamicDiv.style.display = 'none'
         autoselect.style.display = 'none'
@@ -1094,14 +1261,22 @@ function write(exp_id, index, self_val, computer_val, reaction_time, time, optio
             time: time,
             option: option,
             other_option: other_option,
+<<<<<<< HEAD
             inputValue: parseInt(inputValue),
             qinmidu: parseInt(qinmidu),
+=======
+            inputValue : inputValue,
+            qinmidu :qinmidu,
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         })
     }).then(response => response)
         .catch(error => {
             console.error('set data error :', error);
         });
+<<<<<<< HEAD
         console.log(qinmidu)
+=======
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
 }
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -1547,6 +1722,7 @@ function generateRandomPermutation(num) {
 
     return nums; // 返回随机全排列
 }
+<<<<<<< HEAD
 window.onload = function () {
     // 监听 dynam 按钮的点击事件
     document.getElementById('dynam').addEventListener('click', function () {
@@ -1555,16 +1731,29 @@ window.onload = function () {
         if (inputValue === '') {
             alert("请输入一个亲密度");
         }
+=======
+window.onload = function() {
+    // 监听 dynam 按钮的点击事件
+    document.getElementById('dynam').addEventListener('click', function() {
+        // 获取第一个输入框的值
+        inputValue = document.getElementById('input1').value;
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         console.log('Input 1 Value:', inputValue);
     });
 
     // 监听 anotherStartDiv 按钮的点击事件
+<<<<<<< HEAD
     document.getElementById('anotherStartDiv').addEventListener('click', function () {
         // 获取第二个输入框的值
         qinmiduValue = document.getElementById('input2').value;
         if (qinmiduValue === '') {
             alert("请输入一个亲密度");
         }
+=======
+    document.getElementById('anotherStartDiv').addEventListener('click', function() {
+        // 获取第二个输入框的值
+        qinmiduValue = document.getElementById('input2').value;
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         console.log('Input 2 Value:', qinmiduValue);
     });
 };

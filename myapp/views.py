@@ -40,7 +40,11 @@ def save(request):
         data['other_option'].append(result.other_option)
         data['inputValue'].append(result.inputValue)
         data['qinmidu'].append(result.qinmidu)
+<<<<<<< HEAD
         print(data['qinmidu'])
+=======
+    
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     # 将数据转换为 Pandas DataFrame
     df = pd.DataFrame(data)
     
@@ -53,8 +57,13 @@ def save(request):
         data_file_name = f'{input_value}_data.csv'
         closeness_file_name = f'{input_value}_closeness.csv'
         
+<<<<<<< HEAD
         # 导出 data 文件，这里不再删除 qinmidu 列
         group.to_csv(data_file_name, index=False)
+=======
+        # 导出 data 文件
+        group.drop(columns=['qinmidu']).to_csv(data_file_name, index=False)
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
         print(f"CSV 文件已成功生成：{data_file_name}")
         
         # 导出 closeness 文件，只包含 inputValue 和 qinmidu 两列
@@ -63,6 +72,7 @@ def save(request):
         print(f"CSV 文件已成功生成：{closeness_file_name}")
     
     return JsonResponse({'status': 'success', 'message': 'Data has been saved'})
+<<<<<<< HEAD
 @csrf_exempt
 def set_exp(request):
     if request.method == 'POST':
@@ -85,6 +95,8 @@ def set_exp(request):
     else:
         return JsonResponse({'status': 'error', 'message': 'Not post'})
     return JsonResponse({'status': 'error', 'message': 'Invilid'})
+=======
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
 def get_image(request, image_name):
     # 构建图片的完整路径
     image_path = os.path.join(settings.BASE_DIR, 'static', 'img', image_name)
@@ -114,7 +126,30 @@ def set_view(request):
     else:
         return JsonResponse({'status': 'error', 'message': 'Not post'})
     return JsonResponse({'status': 'error', 'message': 'Invilid'})
+<<<<<<< HEAD
 
+=======
+@csrf_exempt
+def set_exp(request):
+    if request.method == 'POST':
+        new_data = json.loads(request.body)
+        message = new_data.get('message')
+        exp_id = new_data.get("exp_id")
+        index =  new_data.get("index")
+        self_val = new_data.get("self_val")
+        computer_val = new_data.get("computer_val")
+        reaction_time = new_data.get("reaction_time")
+        time = new_data.get("time")
+        option = new_data.get("option")
+        other_option = new_data.get("other_option")
+        if ExpResult.objects.filter(exp_id=exp_id, index=index) is not None:
+            ExpResult.objects.filter(exp_id=exp_id, index=index).delete()
+            ExpResult.objects.update_or_create(exp_id=exp_id,index=index,self_val=self_val,computer_val=computer_val,reaction_time=reaction_time,time=time,option=option,other_option=other_option)
+            return JsonResponse({'status': 'success', 'message': f'Data has been saved {message}'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Not post'})
+    return JsonResponse({'status': 'error', 'message': 'Invilid'})
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
 def get_exp(request,exp_id):
     data = ExpResult.objects.filter(exp_id=exp_id)
     if data is not None:

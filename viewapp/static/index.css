@@ -57,7 +57,11 @@ html {
     /* 自适应父容器 */
     height: auto;
     /* 保持纵横比 */
+<<<<<<< HEAD
     max-width: 500px;
+=======
+    max-width: 300px;
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
     /* 设置最大宽度 */
     /* transition: opacity 0.5s ease-in-out; */
 }
@@ -395,12 +399,16 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
+<<<<<<< HEAD
 /* 确保没有其他规则影响 */
 #autoselect .sel {
     display: inline-block;
     float: none; /* 如果有 float 规则，确保清除 */
     position: static; /* 如果有 position 规则，确保清除 */
 }
+=======
+
+>>>>>>> 6f2b7b7b4ba58ccbd5da2682897aa087f8d1f1d2
 .radio-group {
     margin-bottom: 10px;
 }
